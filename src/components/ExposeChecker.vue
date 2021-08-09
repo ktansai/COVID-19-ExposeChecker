@@ -42,6 +42,11 @@
         class="mb-5 mt-10"
         cols="12"
       >
+            <v-radio-group v-model="os">
+              <v-radio key="ios" label="iOS" value="ios"></v-radio>
+              <v-radio key="android" label="Android" value="android"></v-radio>
+            </v-radio-group>
+
             <v-textarea 
               v-model=exposeJsonText
               outlined
@@ -107,25 +112,42 @@
     methods:{
       checkJson: function(){
         try {
-          const exposeData = JSON.parse( this.exposeJsonText)
-          const exposeDataArray = exposeData.ExposureChecks
+          if (this.os === "ios") {
+            const exposeData = JSON.parse( this.exposeJsonText)
+            const exposeDataArray = exposeData.ExposureChecks
 
-          this.resultJsonText = exposeDataArray
-          let resultJsonText = ""
-          let resultCount = 0
-          exposeDataArray.forEach(checkItem => {
-            checkItem.Files.forEach(file => {
-              if(file.MatchCount != 0){
-                resultJsonText += JSON.stringify(file,null,2) +",\n"
-                resultCount += 1
-              }
+            this.resultJsonText = exposeDataArray
+            let resultJsonText = ""
+            let resultCount = 0
+            exposeDataArray.forEach(checkItem => {
+              checkItem.Files.forEach(file => {
+                if(file.MatchCount != 0){
+                  resultJsonText += JSON.stringify(file,null,2) +",\n"
+                  resultCount += 1
+                }
+              });
             });
-          });
-          this.resultJsonText = resultJsonText
-          if(resultCount ==0){
-            this.resultText = "陽性者が近くにいた記録はありませんでした。"
-          }else{
-            this.resultText = resultCount + "件の陽性者が近くにいた記録が確認されました。"
+            this.resultJsonText = resultJsonText
+            if(resultCount ==0){
+              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+            }else{
+              this.resultText = resultCount + "件の陽性者が近くにいた記録が確認されました。"
+            }
+          } else if (this.os === "android") {
+            const exposeData = JSON.parse(this.exposeJsonText)
+            const matchedExposures = exposeData.reduce((acc, exposure) => {
+              if (exposure.matchesCount !== 0) {
+                acc.push(exposure)
+              }
+              return acc
+            }, [])
+
+            if (matchedExposures.length === 0) {
+              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+            } else {
+              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
+              this.resultJsonText = matchedExposures.map(e => JSON.stringify(e)).join("\n")
+            }
           }
         } catch (error) {
           alert("データフォーマットエラー");
@@ -137,6 +159,7 @@
     },
     data: function(){
       return {
+        os: 'ios',
         resultJsonText: "",
         resultText: "",
         exposeJsonText: "",

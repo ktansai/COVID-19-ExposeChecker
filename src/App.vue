@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        iOS接触通知ログ解析ツール
+        接触通知ログ解析ツール
       </div>
 
       <v-spacer></v-spacer>

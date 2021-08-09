@@ -20,6 +20,7 @@
                   <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
                   <li>このログデータで分かることは、COCOA陽性登録者が付近にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
                   <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li>
+                  <li>不具合報告や改善要望などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします</li>
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -91,6 +92,10 @@
           <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
           を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。
         </p>
+        
+      </v-col>
+      <v-col>
+        <p>made by <a href="https://twitter.com/ktansai">@ktansai</a></p>
       </v-col>
     </v-row>
   </v-container>

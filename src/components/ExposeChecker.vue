@@ -4,10 +4,10 @@
 
       <v-col class="mb-4 mt-8">
         <h1 class="display-2 font-weight-bold mb-8">
-          iOS接触通知ログ解析ツール
+          接触通知ログ解析ツール
         </h1>
         <p mr-8 ml-8>
-          iOSの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
+          iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
         <v-expansion-panels accordion >
@@ -15,7 +15,7 @@
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
-                  <li>iOSで収集されている COVID-19 接触のログデータの中で、COCOA上の陽性者登録者の端末の近くにいた記録があるかを確認するツールです。</li>
+                  <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOA上の陽性者登録者の端末の近くにいた記録があるかを確認するツールです。</li>
                   <li>具体的には、接触ログデータの中のMatchCountが0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
                   <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
                   <li>このログデータで分かることは、COCOA陽性登録者が付近にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
@@ -27,7 +27,7 @@
                 <v-expansion-panel>
                 <v-expansion-panel-header>使い方</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOSの接触通知ログをコピーする</p>
+                  <p class="text-left">Step1. iOS/Androidの接触通知ログをコピーする<br>(※Android版のスクリーンショットは後日追加予定)</p>
                   <v-img src="@/assets/images/instruction-copy.png" />
                   <br>
                   <p class="text-left">Step2. 下記入力枠にペーストする</p>
@@ -39,7 +39,7 @@
       </v-col>
 
       <v-col
-        class="mb-5 mt-10"
+        class="mb-5 mt-5"
         cols="12"
       >
             <v-radio-group v-model="os">
@@ -95,7 +95,7 @@
         <p>
           上記Hash値をコピーし、
           <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
-          を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。
+          を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。(iOSのみ)
         </p>
         
       </v-col>

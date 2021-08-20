@@ -1,4 +1,4 @@
-# ExposureChecker
+# COCOAログチェッカー
 
 ## Project setup
 ```

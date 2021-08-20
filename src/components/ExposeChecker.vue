@@ -2,18 +2,20 @@
   <v-container>
     <v-row class="text-center">
 
-      <v-col class="mb-4 mt-8">
-        <h1 class="display-2 font-weight-bold mb-8">
-          接触通知ログ解析ツール
+      <v-col class="mt-8">
+        <h1 class="display-2 font-weight-bold my-2">
+          COCOAログチェッカー
         </h1>
-        <p mr-8 ml-8>
+        <p>接触通知ログ解析ツール</p>
+
+        <p class="mt-16 mx-8">
           iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
-        <p style="color:red;">
+        <p style="color:red;" class="mb-8">
           Androidをご利用の方へ:<br>
           接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
-          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデート予定です。
+          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデートにて対応予定です。
         </p>
 
         <v-expansion-panels accordion >
@@ -59,7 +61,7 @@
       </v-col>
 
       <v-col
-        class="mb-5 mt-5"
+        class="my-4"
         cols="12"
       >
             <v-radio-group v-model="os">
@@ -85,7 +87,7 @@
             <v-col cols="3"> 
             <v-btn
                   color="primary"
-                  class="mb-10"
+                  class="mb-8"
                   v-on:click="checkJson"
             >
             チェックする
@@ -93,7 +95,7 @@
             </v-col>
             </v-row>
 
-            <p > 
+            <p class="my-10" > 
               <b>結果:</b> {{resultText}}
             </p>
             <v-textarea 
@@ -102,12 +104,31 @@
               readonly
               label="ここに詳細な結果のデータが出ます"
               v-bind:value=resultJsonText 
-              class="mt-12 mb-4">
+              class="my-4">
             </v-textarea>
+      </v-col>
+      <v-col class="my-2" v-if="resultText.length > 0"> 
+        <v-btn
+          rounded
+          color="#1DA1F2"
+          dark
+          target="_blank"
+          v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://ktansai.github.io/COVID-19-ExposeChecker'+'&hashtags=COCOAログチェッカー'"
+        >
+          <v-icon
+            left
+            dark
+          >
+            mdi-twitter
+          </v-icon>
+          結果を投稿
+          
+        </v-btn>
+        <p class="mt-4 text-caption">※Twitterに遷移します(上記のボタンを押してもすぐには投稿されません)</p>
       </v-col>
       <v-col
         cols="12"
-        class="mb-16"
+        class="my-8"
       >
         <h2 class="headline font-weight-bold mb-3">
           もし陽性者と近くにいたことが疑われる場合は、

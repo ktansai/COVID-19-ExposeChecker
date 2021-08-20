@@ -2,18 +2,20 @@
   <v-container>
     <v-row class="text-center">
 
-      <v-col class="mb-4 mt-8">
-        <h1 class="display-2 font-weight-bold mb-8">
-          接触通知ログ解析ツール
+      <v-col class="mt-8">
+        <h1 class="display-2 font-weight-bold my-2">
+          COCOAログチェッカー
         </h1>
-        <p mr-8 ml-8>
+        <p>接触通知ログ解析ツール</p>
+
+        <p class="mt-16 mx-8">
           iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
-        <p style="color:red;">
+        <p style="color:red;" class="mb-8">
           Androidをご利用の方へ:<br>
           接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
-          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデート予定です。
+          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデートにて対応予定です。
         </p>
 
         <v-expansion-panels accordion >

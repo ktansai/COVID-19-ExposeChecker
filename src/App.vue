@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        接触通知ログ解析ツール
+        COCOAログチェッカー
       </div>
 
       <v-spacer></v-spacer>

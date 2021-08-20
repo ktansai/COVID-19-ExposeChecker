@@ -10,6 +10,12 @@
           iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
+        <p style="color:red;">
+          Androidをご利用の方へ:<br>
+          接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
+          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデート予定です。
+        </p>
+
         <v-expansion-panels accordion >
               <v-expansion-panel>
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
@@ -24,17 +30,31 @@
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
-                <v-expansion-panel>
-                <v-expansion-panel-header>使い方</v-expansion-panel-header>
+              <v-expansion-panel>
+                <v-expansion-panel-header>使い方(iOS)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOS/Androidの接触通知ログをコピーする<br>(※Android版のスクリーンショットは後日追加予定)</p>
-                  <v-img src="@/assets/images/instruction-copy.png" />
+                  <p class="text-left">Step1. iOSの接触通知ログをコピーする</p>
+                  <v-img src="@/assets/images/instruction-ios-01.png" />
                   <br>
                   <p class="text-left">Step2. 下記入力枠にペーストする</p>
-                  <v-img src="@/assets/images/instruction-paste.png"/>
+                  <v-img src="@/assets/images/instruction-ios-02.png"/>
                 </v-expansion-panel-content>
-                
               </v-expansion-panel>
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <p class="text-left">Step1. Androidの接触通知ログを開く</p>
+                  <v-img src="@/assets/images/instruction-android.png" />
+                  <br>
+                  <p class="text-left">Step2. 下記入力枠にペーストする</p>
+                  <p class="text-left" style="color:red;">
+                    接触通知ログファイルのコピー&amp;ペーストがAndroid版だとiOSのように素直にできず、どうすれば簡単にコピー&amp;ペーストできるか調査中です。<br>
+                    GoogleDrive等に一旦保存して、テキストファイルとして開いて、コピー&amp;ペースト等すれば、ログの中身はコピーできるかもしれません。<br>
+                    何か簡単にできる良い方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
+                  </p>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
             </v-expansion-panels>
       </v-col>
 
@@ -44,7 +64,7 @@
       >
             <v-radio-group v-model="os">
               <v-radio key="ios" label="iOS" value="ios"></v-radio>
-              <v-radio key="android" label="Android" value="android"></v-radio>
+              <v-radio key="android" label="Android(β版)" value="android"></v-radio>
             </v-radio-group>
 
             <v-textarea 

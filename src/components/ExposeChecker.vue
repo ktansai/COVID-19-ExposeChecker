@@ -59,7 +59,7 @@
       </v-col>
 
       <v-col
-        class="mb-5 mt-5"
+        class="my-4"
         cols="12"
       >
             <v-radio-group v-model="os">
@@ -85,7 +85,7 @@
             <v-col cols="3"> 
             <v-btn
                   color="primary"
-                  class="mb-10"
+                  class="mb-8"
                   v-on:click="checkJson"
             >
             チェックする
@@ -93,7 +93,7 @@
             </v-col>
             </v-row>
 
-            <p > 
+            <p class="my-10" > 
               <b>結果:</b> {{resultText}}
             </p>
             <v-textarea 
@@ -102,12 +102,31 @@
               readonly
               label="ここに詳細な結果のデータが出ます"
               v-bind:value=resultJsonText 
-              class="mt-12 mb-4">
+              class="my-4">
             </v-textarea>
+      </v-col>
+      <v-col class="my-2" v-if="resultText.length > 0"> 
+        <v-btn
+          rounded
+          color="#1DA1F2"
+          dark
+          target="_blank"
+          v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://ktansai.github.io/COVID-19-ExposeChecker'+'&hashtags=COCOAログチェッカー'"
+        >
+          <v-icon
+            left
+            dark
+          >
+            mdi-twitter
+          </v-icon>
+          結果を投稿
+          
+        </v-btn>
+        <p class="mt-4 text-caption">※Twitterに遷移します(上記のボタンを押してもすぐには投稿されません)</p>
       </v-col>
       <v-col
         cols="12"
-        class="mb-16"
+        class="my-8"
       >
         <h2 class="headline font-weight-bold mb-3">
           もし陽性者と近くにいたことが疑われる場合は、

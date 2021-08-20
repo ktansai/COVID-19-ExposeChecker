@@ -44,7 +44,7 @@
       >
             <v-radio-group v-model="os">
               <v-radio key="ios" label="iOS" value="ios"></v-radio>
-              <v-radio key="android" label="Android" value="android"></v-radio>
+              <v-radio key="android" label="Android(β版)" value="android"></v-radio>
             </v-radio-group>
 
             <v-textarea 

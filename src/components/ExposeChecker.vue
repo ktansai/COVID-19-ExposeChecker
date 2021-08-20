@@ -10,6 +10,12 @@
           iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
+        <p style="color:red;">
+          Androidをご利用の方へ:<br>
+          接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
+          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデート予定です。
+        </p>
+
         <v-expansion-panels accordion >
               <v-expansion-panel>
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>

@@ -30,17 +30,31 @@
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
-                <v-expansion-panel>
-                <v-expansion-panel-header>使い方</v-expansion-panel-header>
+              <v-expansion-panel>
+                <v-expansion-panel-header>使い方(iOS)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOS/Androidの接触通知ログをコピーする<br>(※Android版のスクリーンショットは後日追加予定)</p>
-                  <v-img src="@/assets/images/instruction-copy.png" />
+                  <p class="text-left">Step1. iOSの接触通知ログをコピーする</p>
+                  <v-img src="@/assets/images/instruction-ios-01.png" />
                   <br>
                   <p class="text-left">Step2. 下記入力枠にペーストする</p>
-                  <v-img src="@/assets/images/instruction-paste.png"/>
+                  <v-img src="@/assets/images/instruction-ios-02.png"/>
                 </v-expansion-panel-content>
-                
               </v-expansion-panel>
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <p class="text-left">Step1. Androidの接触通知ログを開く</p>
+                  <v-img src="@/assets/images/instruction-android.png" />
+                  <br>
+                  <p class="text-left">Step2. 下記入力枠にペーストする</p>
+                  <p class="text-left" style="color:red;">
+                    接触通知ログファイルのコピー&amp;ペーストがAndroid版だとiOSのように素直にできず、どうすれば簡単にコピー&amp;ペーストできるか調査中です。<br>
+                    GoogleDrive等に一旦保存して、テキストファイルとして開いて、コピー&amp;ペースト等すれば、ログの中身はコピーできるかもしれません。<br>
+                    何か簡単にできる良い方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
+                  </p>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
             </v-expansion-panels>
       </v-col>
 

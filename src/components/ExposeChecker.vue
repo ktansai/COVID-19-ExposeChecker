@@ -1,14 +1,16 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-
-      <v-col class="mt-8">
+  <v-container class="text-center px-8">
+      <v-row class="mt-8 justify-center" >
+        <div>
         <h1 class="display-2 font-weight-bold my-2">
           COCOAログチェッカー
         </h1>
         <p>接触通知ログ解析ツール</p>
-
-        <p class="mt-16 mx-8">
+        </div>
+      </v-row>
+      <v-row class="justify-center">
+        <div>
+        <p class="my-8 mx-8 ">
           iOS/Androidの設定アプリから閲覧できる接触通知のログデータを解析し、<br>
           約2週間の間にCOCOA上の陽性者登録者との接触通知のログを表示します。
         </p>
@@ -17,7 +19,9 @@
           接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
           後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデートにて対応予定です。
         </p>
-
+        </div>
+      </v-row>
+      <v-row class="my-8">
         <v-expansion-panels accordion >
               <v-expansion-panel>
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
@@ -58,16 +62,17 @@
                 </v-expansion-panel-content>
             </v-expansion-panel>
             </v-expansion-panels>
-      </v-col>
+      </v-row>
 
-      <v-col
+      <v-row
         class="my-4"
-        cols="12"
       >
-            <v-radio-group v-model="os">
-              <v-radio key="ios" label="iOS" value="ios"></v-radio>
-              <v-radio key="android" label="Android(β版)" value="android"></v-radio>
-            </v-radio-group>
+        <v-radio-group v-model="os">
+          <v-radio key="ios" label="iOS" value="ios"></v-radio>
+          <v-radio key="android" label="Android(β版)" value="android"></v-radio>
+        </v-radio-group>
+      </v-row>
+      <v-row >
 
             <v-textarea 
               v-model=exposeJsonText
@@ -75,29 +80,34 @@
               label="ここに接触通知のログファイルのjsonをペーストしてください"
             >
             </v-textarea>
-
-            <v-row justify="center">
-            <v-col cols="3"> 
-              <v-btn
-                    class="mb-10"
-                    v-on:click="clearJson">
-              クリア
-              </v-btn>
-            </v-col>
-            <v-col cols="3"> 
-            <v-btn
-                  color="primary"
-                  class="mb-8"
-                  v-on:click="checkJson"
-            >
-            チェックする
-            </v-btn>
-            </v-col>
-            </v-row>
-
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="3"> 
+          <v-btn
+                class="mb-10"
+                v-on:click="clearJson">
+          クリア
+          </v-btn>
+        </v-col>
+        <v-col cols="3"> 
+        <v-btn
+              color="primary"
+              class="mb-8"
+              v-on:click="checkJson"
+        >
+        チェックする
+        </v-btn>
+        </v-col>
+      </v-row>
+      <v-row class="justify-center">
+        <div>
             <p class="my-10" > 
               <b>結果:</b> {{resultText}}
             </p>
+            <p v-if="resultText.length > 0" class="text-caption">スマートフォン内の接触通知ログは14日間しか残らないため、<br>このページをブックマークに登録し、継続的に1週間に1回程度の頻度で確認することをおすすめします。</p>
+        </div>
+      </v-row>
+      <v-row>
             <v-textarea 
               outlined
               auto-grow
@@ -106,26 +116,28 @@
               v-bind:value=resultJsonText 
               class="my-4">
             </v-textarea>
-      </v-col>
-      <v-col class="my-2" v-if="resultText.length > 0"> 
-        <v-btn
-          rounded
-          color="#1DA1F2"
-          dark
-          target="_blank"
-          v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://ktansai.github.io/COVID-19-ExposeChecker'+'&hashtags=COCOAログチェッカー'"
-        >
-          <v-icon
-            left
+      </v-row>
+      <v-row justify="center" class="my-2 " v-if="resultText.length > 0"> 
+        <div>
+          <v-btn
+            rounded
+            color="#1DA1F2"
             dark
+            target="_blank"
+            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://ktansai.github.io/COVID-19-ExposeChecker'+'&hashtags=COCOAログチェッカー'"
           >
-            mdi-twitter
-          </v-icon>
-          結果を投稿
-          
-        </v-btn>
-        <p class="mt-4 text-caption">※Twitterに遷移します(上記のボタンを押してもすぐには投稿されません)</p>
-      </v-col>
+            <v-icon
+              left
+              dark
+            >
+              mdi-twitter
+            </v-icon>
+            結果を投稿
+            
+          </v-btn>
+          <p class="mt-4 text-caption">※Twitterに遷移します(上記のボタンを押してもすぐには投稿されません)</p>
+        </div>
+      </v-row>
       <v-col
         cols="12"
         class="my-8"
@@ -143,7 +155,6 @@
       <v-col>
         <p>made by <a href="https://twitter.com/ktansai">@ktansai</a></p>
       </v-col>
-    </v-row>
   </v-container>
 </template>
 

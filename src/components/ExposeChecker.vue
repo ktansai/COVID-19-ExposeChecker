@@ -174,22 +174,20 @@
             const exposeData = JSON.parse( this.exposeJsonText)
             const exposeDataArray = exposeData.ExposureChecks
 
-            this.resultJsonText = exposeDataArray
-            let resultJsonText = ""
-            let resultCount = 0
+            let matchedExposures = []
             exposeDataArray.forEach(checkItem => {
               checkItem.Files.forEach(file => {
-                if(file.MatchCount != 0){
-                  resultJsonText += JSON.stringify(file,null,2) +",\n"
-                  resultCount += 1
+                if(file.MatchCount !== 0){
+                  delete file.Timestamp
+                  matchedExposures.push(file)
                 }
               });
             });
-            this.resultJsonText = resultJsonText
-            if(resultCount ==0){
+            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
+            if (matchedExposures.length === 0){
               this.resultText = "陽性者が近くにいた記録はありませんでした。"
             }else{
-              this.resultText = resultCount + "件の陽性者が近くにいた記録が確認されました。"
+              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
@@ -204,7 +202,7 @@
               this.resultText = "陽性者が近くにいた記録はありませんでした。"
             } else {
               this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
-              this.resultJsonText = matchedExposures.map(e => JSON.stringify(e)).join("\n")
+              this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             }
           }
         } catch (error) {

@@ -3,7 +3,7 @@
       <v-row class="mt-8 justify-center" >
         <div>
         <h1 class="display-2 font-weight-bold my-2">
-          COCOAログチェッカー
+          <span class="d-inline-block">COCOAログ</span><span class="d-inline-block">チェッカー</span>
         </h1>
         <p>接触通知ログ解析ツール</p>
         </div>

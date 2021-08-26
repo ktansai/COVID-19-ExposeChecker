@@ -87,20 +87,17 @@
             >
             </v-textarea>
       </v-row>
-      <v-row justify="center">
-        <v-col cols="3"> 
+      <v-row justify="justify-center" class="mb-10">
+        <v-col cols="6"> 
           <v-btn
-                class="mb-10"
                 v-on:click="clearJson">
           クリア
           </v-btn>
         </v-col>
-        <v-col cols="3"> 
+        <v-col cols="6"> 
         <v-btn
               color="primary"
-              class="mb-8"
-              v-on:click="checkJson"
-        >
+              v-on:click="checkJson">
         チェックする
         </v-btn>
         </v-col>
@@ -110,20 +107,11 @@
             <p class="my-10" > 
               <b>結果:</b> {{resultText}}
             </p>
-            <p v-if="resultText.length > 0" class="text-caption">スマートフォン内の接触通知ログは14日間しか残らないため、<br>このページをブックマークに登録し、継続的に1週間に1回程度の頻度で確認することをおすすめします。</p>
         </div>
       </v-row>
-      <v-row>
-            <v-textarea 
-              outlined
-              auto-grow
-              readonly
-              label="ここに詳細な結果のデータが出ます"
-              v-bind:value=resultJsonText 
-              class="my-4">
-            </v-textarea>
-      </v-row>
-      <v-row justify="center" class="my-2 " v-if="resultText.length > 0"> 
+
+
+      <v-row justify="center" class="my-8" v-if="resultText.length > 0" > 
         <div>
           <v-btn
             rounded
@@ -141,8 +129,41 @@
             結果を投稿
             
           </v-btn>
-          <p class="mt-4 text-caption">※Twitterに遷移します(上記のボタンを押してもすぐには投稿されません)</p>
+          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
         </div>
+      </v-row>
+      <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
+        <div>
+        <v-btn
+          rounded
+          color="gray"
+          dark
+          v-bind:href="`https://calendar.google.com/calendar/render?action=TEMPLATE&text=[リマインド]:COCOAログチェッカー&details=<a>https://ktansai.github.io/COVID-19-ExposeChecker/</a>&dates=${nextDate}`"
+        >
+        <v-icon
+              left
+              dark
+            >
+              mdi-calendar
+        </v-icon>
+          予定に追加
+        </v-btn>
+        <p class="text-caption my-4">
+          <span class="d-inline-block">スマートフォン内のログは14日間しか残りません。</span><br>
+          <span class="d-inline-block">上のボタンを押すとGoogleカレンダーに</span>
+          <span class="d-inline-block">リマインドの予定を追加できます。</span>
+          </p>
+        </div>
+      </v-row>
+      <v-row>
+            <v-textarea 
+              outlined
+              auto-grow
+              readonly
+              label="ここに詳細な結果のデータが出ます"
+              v-bind:value=resultJsonText 
+              class="my-4">
+            </v-textarea>
       </v-row>
       <v-col
         cols="12"
@@ -220,6 +241,15 @@
         resultText: "",
         exposeJsonText: "",
       }
+    },
+    computed : {
+      nextDate: function(){
+        const today = new Date()
+        const nextStartDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, "") + "T180000"
+        const nextEndDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, "") + "T190000"
+        const result = `${nextStartDate}/${nextEndDate}`
+        return result
+      },
     }
   }
 </script>

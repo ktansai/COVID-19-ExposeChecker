@@ -135,7 +135,7 @@
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
-          v-on:click="this.$gtag.event('checkJson')"
+          v-on:click="this.$gtag.event('addCalendar')"
           rounded
           color="gray"
           dark

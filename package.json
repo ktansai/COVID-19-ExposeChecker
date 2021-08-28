@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-gtag": "^1.16.1",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {

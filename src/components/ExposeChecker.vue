@@ -217,6 +217,7 @@
             const exposeData = JSON.parse(this.exposeJsonText)
             const matchedExposures = exposeData.reduce((acc, exposure) => {
               if (exposure.matchesCount !== 0) {
+                delete exposure.timestamp
                 acc.push(exposure)
               }
               return acc

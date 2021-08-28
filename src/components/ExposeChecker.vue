@@ -135,6 +135,7 @@
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
+          v-on:click="this.$gtag.event('checkJson')"
           rounded
           color="gray"
           dark
@@ -190,6 +191,7 @@
     name: 'ExposeChecker',
     methods:{
       checkJson: function(){
+        this.$gtag.event("checkJson")
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)

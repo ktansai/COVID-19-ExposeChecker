@@ -135,11 +135,12 @@
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
-          v-on:click="this.$gtag.event('addCalendar')"
+          @click="this.$gtag.event('addCalendar')"
           rounded
           color="gray"
           dark
-          v-bind:href="`https://calendar.google.com/calendar/render?action=TEMPLATE&text=[リマインド]:COCOAログチェッカー&details=<a>https://ktansai.github.io/COVID-19-ExposeChecker/</a>&dates=${nextDate}`"
+          target="_blank"
+          v-bind:href="`https://calendar.google.com/calendar/render?action=TEMPLATE&text=[リマインド]:COCOAログチェッカー&details=<a href='https://ktansai.github.io/COVID-19-ExposeChecker'>COCOAログチェッカー</a>%0D%0A%0D%0A保存の際は%0D%0A・予定の繰り返し設定%0D%0A・通知設定%0D%0Aを有効にするのをおすすめします&dates=${nextDate}`"
         >
         <v-icon
               left

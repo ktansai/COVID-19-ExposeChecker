@@ -78,16 +78,22 @@
           <v-radio key="android" label="Android(β版)" value="android"></v-radio>
         </v-radio-group>
       </v-row>
-      <v-row >
-
+      <v-row>
             <v-textarea 
+              v-if="os === 'ios'"
               v-model=exposeJsonText
               outlined
               label="ここに接触通知のログファイルのjsonをペーストしてください"
             >
             </v-textarea>
+            <div v-else>
+              <p>
+                接触通知のログjsonファイルをアップロードしてください。(サーバーには送信はしません)
+              </p>
+              <input type="file" accept="application/json" @change="onFileChange" />
+            </div>
       </v-row>
-      <v-row class="mb-10 justify-center">
+      <v-row v-if="os === 'ios'" class="mb-10 justify-center">
         <v-col cols="6"> 
           <v-btn
                 v-on:click="clearJson">
@@ -240,6 +246,21 @@
       addCalendarLog: function (){
         this.$gtag.event("addCalendar")
       },
+      onFileChange: function (e){
+        const self = this;
+        const { files } = e.target
+        if (files.length <= 0) {
+          return
+        }
+
+        const file = files[0]
+        const reader = new FileReader()
+        reader.onload = function () {
+          self.exposeJsonText = reader.result
+          self.checkJson()
+        }
+        reader.readAsText(file)
+      }
     },
     data: function(){
       return {

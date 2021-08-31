@@ -87,7 +87,7 @@
             >
             </v-textarea>
       </v-row>
-      <v-row justify="justify-center" class="mb-10">
+      <v-row class="mb-10 justify-center">
         <v-col cols="6"> 
           <v-btn
                 v-on:click="clearJson">
@@ -111,7 +111,7 @@
       </v-row>
 
 
-      <v-row justify="center" class="my-8" v-if="resultText.length > 0" > 
+      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
         <div>
           <v-btn
             rounded
@@ -135,7 +135,7 @@
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
-          @click="this.$gtag.event('addCalendar')"
+          @click="addCalendarLog"
           rounded
           color="gray"
           dark
@@ -236,7 +236,10 @@
       },
       clearJson: function(){
         this.exposeJsonText = ""
-      }
+      },
+      addCalendarLog: function (){
+        this.$gtag.event("addCalendar")
+      },
     },
     data: function(){
       return {

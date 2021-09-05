@@ -10,15 +10,15 @@
       </v-row>
       <v-row class="justify-center">
         <div>
-        <p class="my-8 mx-8">
+        <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
           <span class="d-inline-block">約2週間の間にCOCOA上の陽性者登録者との</span>
           <span class="d-inline-block">接触通知のログを表示します。</span>
         </p>
-        <p class="my-8 mx-8">
+        <p class="my-8 mx-2">
           <span class="d-inline-block">
-          使用の際は、事前に下記の注意事項/詳細説明を読み、
+          使用の際は、下記の注意事項/詳細説明を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
         </p>

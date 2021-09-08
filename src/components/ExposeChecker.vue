@@ -29,12 +29,12 @@
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
-                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOA上の陽性者登録者の端末の近くにいた記録があるかを確認するツールです。</li>
+                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li>
                     <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
                     <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
                     <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
                     <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li>
-                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li>
+                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li>
                   </ul>
                     <v-layout justify-center my-4 >
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
@@ -195,11 +195,13 @@
         class="my-8"
       >
         <h2 class="headline font-weight-bold mb-3">
-          もし陽性者と近くにいたことが疑われる場合は、
+          もし陽性登録者と近くにいたことが疑われる場合は、
         </h2>
         <p>
           上記Hash値をコピーし、
-          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
+          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a><br>
+          または、
+          <a href="https://datastudio.google.com/u/0/reporting/069598a2-3f01-4b51-b023-cdb478992182" target="_blank">接触日シート別冊</a>
           を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。(iOSのみ)
         </p>
         
@@ -232,9 +234,9 @@
             });
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
-              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
             }else{
-              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
@@ -247,9 +249,9 @@
             }, [])
 
             if (matchedExposures.length === 0) {
-              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
             } else {
-              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             }
           }

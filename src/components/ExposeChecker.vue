@@ -17,7 +17,7 @@
         </p>
         <p class="my-8 mx-2">
           <span class="d-inline-block">
-          使用の際は、下記の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
+          使用の際は<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
         </p>
@@ -29,26 +29,27 @@
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
-                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li>
-                    <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
-                    <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
-                    <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
-                    <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li>
-                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li>
+                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li><br>
+                    <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li><br>
+                    <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li><br>
+                    <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li><br>
+                    <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li><br>
+                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li><br>
                   </ul>
                     <v-layout justify-center my-4 >
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
                     </v-layout>
                   <ul>
-                    <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOAのインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li>
-                    <li>接触があった日時は、Hash値を用いて、サイト下部の<a href="https://cacaotest.sakura.ne.jp/" target="_blank" >外部ページ</a>にて24時間の範囲で絞り込み可能です。(iOSのみ)</li>
-                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br>
+                    <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOAのインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li><br>
+                    <li>接触があった日時は、Hash値を用いて、サイト下部の<a href="https://cacaotest.sakura.ne.jp/" target="_blank" >外部ページ</a>にて24時間の範囲で絞り込み可能です。(iOSのみ)</li><br>
+                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br><br>
                       例えば、COCOAユーザーAさんとの接触検知が9月1日、Aさんの発症が9月4日(潜伏期間3日間)、Aさんの陽性登録が完了したのが9月7日、だったとすると、スマホ内の接触ログデータのTimestampは9月7日以降になりますが、実際の接触はそれより以前(この例だと9月1日)になります。<br>
                       潜伏期間や、登録までの期間は場合によるので、この方法では正確な日時は特定ができません。
-                    </li>
-                    <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li>
-                    <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li>
-                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li>
+                    </li><br>
+                    <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
+                    <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
+                    <li>COCOAログチェッカーは<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>上にソースコードを公開しており、多くの方に提案/指摘をいただきながら作成しています。ご協力いただいている全ての方に多大な感謝を申し上げます。</li>
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -102,8 +103,7 @@
             <v-textarea 
               v-model=exposeJsonText
               outlined
-              label="ここに接触通知のログファイルのjsonをペーストしてください"
-            >
+              label="ここにログファイルをペーストしてください">
             </v-textarea>
       </v-row>
       <p class="text-caption">

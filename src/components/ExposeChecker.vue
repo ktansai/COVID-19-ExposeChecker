@@ -17,15 +17,15 @@
         </p>
         <p class="my-8 mx-2">
           <span class="d-inline-block">
-          使用の際は、下記の注意事項/詳細説明を読み、
+          使用の際は、下記の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
         </p>
         </div>
       </v-row>
       <v-row class="my-8">
-        <v-expansion-panels accordion >
-              <v-expansion-panel>
+        <v-expansion-panels accordion multiple v-model="panel" >
+              <v-expansion-panel id="notes">
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
@@ -128,8 +128,12 @@
       <v-row class="justify-center">
         <div>
             <p class="my-10" > 
-              <b>結果:</b> {{resultText}}
+              <b>結果:</b> {{resultText}}<br>
             </p>
+            <p class="text-caption" style="color:red;" v-if="resultText.length > 0">
+            <span v-html="explainText" ></span><br>
+            ログデータや結果に関する説明は、サイト上部の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>をご覧ください。
+            </p> 
         </div>
       </v-row>
 
@@ -218,6 +222,9 @@
     methods:{
       checkJson: function(){
         this.$gtag.event("checkJson")
+
+        const explainTextZeroContact= "本結果はCOCOA上の陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)
@@ -235,6 +242,7 @@
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
               this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.explainText = explainTextZeroContact
             }else{
               this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
             }
@@ -250,6 +258,7 @@
 
             if (matchedExposures.length === 0) {
               this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.explainText = explainTextZeroContact
             } else {
               this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
@@ -265,6 +274,9 @@
       addCalendarLog: function (){
         this.$gtag.event("addCalendar")
       },
+      showNotes: function(){
+        this.panel = [0]
+      },
     },
     data: function(){
       return {
@@ -272,6 +284,8 @@
         resultJsonText: "",
         resultText: "",
         exposeJsonText: "",
+        explainText: "",
+        panel:[],
       }
     },
     computed : {

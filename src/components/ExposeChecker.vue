@@ -13,40 +13,43 @@
         <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
-          <span class="d-inline-block">約2週間の間にCOCOA上の陽性者登録者との</span>
-          <span class="d-inline-block">接触通知のログを表示します。</span>
+          <span class="d-inline-block">約2週間の間にCOCOAの陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
         </p>
         <p class="my-8 mx-2">
           <span class="d-inline-block">
-          使用の際は、下記の注意事項/詳細説明を読み、
+          使用の際は<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
-        </p>
-        <p style="color:red;" class="mb-8">
-          Androidをご利用の方へ:<br>
-          接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
-          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデートにて対応予定です。
         </p>
         </div>
       </v-row>
       <v-row class="my-8">
-        <v-expansion-panels accordion >
-              <v-expansion-panel>
+        <v-expansion-panels accordion multiple v-model="panel" >
+              <v-expansion-panel id="notes">
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
-                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOA上の陽性者登録者の端末の近くにいた記録があるかを確認するツールです。</li>
-                    <li>具体的には、接触ログデータの中のMatchCountが0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
-                    <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
-                    <li>このログデータで分かることは、COCOA陽性登録者が付近にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
-                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性者との接触」のログすべてを表示しています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>)</li>
+                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li><br>
+                    <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li><br>
+                    <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li><br>
+                    <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li><br>
+                    <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li><br>
+                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li><br>
                   </ul>
                     <v-layout justify-center my-4 >
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
                     </v-layout>
                   <ul>
-                    <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li>
-                    <li>不具合報告や改善要望などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします</li>
+                    <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOAのインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li><br>
+                    <li>接触があった日時は、Hash値を用いて、サイト下部の<a href="https://cacaotest.sakura.ne.jp/" target="_blank" >外部ページ</a>にて24時間の範囲で絞り込み可能です。(iOSのみ)</li><br>
+                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br><br>
+                      例えば、COCOAユーザーAさんとの接触検知が9月1日、Aさんの発症が9月4日(潜伏期間3日間)、Aさんの陽性登録が完了したのが9月7日、だったとすると、スマホ内の接触ログデータのTimestampは9月7日以降になりますが、実際の接触はそれより以前(この例だと9月1日)になります。<br>
+                      潜伏期間や、登録までの期間は場合によるので、この方法では正確な日時は特定ができません。
+                    </li><br>
+                    <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
+                    <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
+                    <li>COCOAログチェッカーは<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>上にソースコードを公開しており、多くの方に提案/指摘をいただきながら作成しています。ご協力いただいている全ての方に多大な感謝を申し上げます。</li>
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -64,14 +67,23 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. Androidの接触通知ログを開く</p>
+                  <p class="text-left">
+                    Step1. Androidの接触通知ログをGoogleDriveまたはローカルに保存する<br>
+                    (保存方法/アプリなどの候補が表示されたら、GoogleDriveまたは、ローカルに保存をする)<br>
+                  </p>
+                  <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
+
                   <v-img src="@/assets/images/instruction-android.png" />
                   <br>
-                  <p class="text-left">Step2. 下記入力枠にペーストする</p>
+                  <p class="text-left">
+                    Step2.
+                    GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
+                    [すべて選択]を押し、[コピー]を押す。<br>
+                    (近日中にスクリーンショットを掲載します)
+                  </p>
+                  <p class="text-left">Step3. 下記入力枠にペーストする<br>(近日中にスクリーンショットを掲載します)</p>
                   <p class="text-left" style="color:red;">
-                    接触通知ログファイルのコピー&amp;ペーストがAndroid版だとiOSのように素直にできず、どうすれば簡単にコピー&amp;ペーストできるか調査中です。<br>
-                    GoogleDrive等に一旦保存して、テキストファイルとして開いて、コピー&amp;ペースト等すれば、ログの中身はコピーできるかもしれません。<br>
-                    何か簡単にできる良い方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
+                    より簡単な方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
                   </p>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -83,7 +95,7 @@
       >
         <v-radio-group v-model="os">
           <v-radio key="ios" label="iOS" value="ios"></v-radio>
-          <v-radio key="android" label="Android(β版)" value="android"></v-radio>
+          <v-radio key="android" label="Android" value="android"></v-radio>
         </v-radio-group>
       </v-row>
       <v-row >
@@ -91,8 +103,7 @@
             <v-textarea 
               v-model=exposeJsonText
               outlined
-              label="ここに接触通知のログファイルのjsonをペーストしてください"
-            >
+              label="ここにログファイルをペーストしてください">
             </v-textarea>
       </v-row>
       <p class="text-caption">
@@ -117,8 +128,12 @@
       <v-row class="justify-center">
         <div>
             <p class="my-10" > 
-              <b>結果:</b> {{resultText}}
+              <b>結果:</b> {{resultText}}<br>
             </p>
+            <p class="text-caption" style="color:red;" v-if="resultText.length > 0">
+            <span v-html="explainText" ></span><br>
+            ログデータや結果に関する説明は、サイト上部の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>をご覧ください。
+            </p> 
         </div>
       </v-row>
 
@@ -184,18 +199,20 @@
         class="my-8"
       >
         <h2 class="headline font-weight-bold mb-3">
-          もし陽性者と近くにいたことが疑われる場合は、
+          もし陽性登録者と近くにいたことが疑われる場合は、
         </h2>
         <p>
           上記Hash値をコピーし、
-          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
+          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a><br>
+          または、
+          <a href="https://datastudio.google.com/u/0/reporting/069598a2-3f01-4b51-b023-cdb478992182" target="_blank">接触日シート別冊</a>
           を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。(iOSのみ)
         </p>
         
       </v-col>
-      <v-col>
-        <p>made by <a href="https://twitter.com/ktansai">@ktansai</a></p>
-      </v-col>
+      <v-row class="mt-8 justify-center">
+        <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
+      </v-row>
   </v-container>
 </template>
 
@@ -205,6 +222,9 @@
     methods:{
       checkJson: function(){
         this.$gtag.event("checkJson")
+
+        const explainTextZeroContact= "本結果はCOCOA上の陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)
@@ -221,9 +241,10 @@
             });
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
-              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.explainText = explainTextZeroContact
             }else{
-              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
@@ -236,9 +257,10 @@
             }, [])
 
             if (matchedExposures.length === 0) {
-              this.resultText = "陽性者が近くにいた記録はありませんでした。"
+              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.explainText = explainTextZeroContact
             } else {
-              this.resultText = `${matchedExposures.length}件の陽性者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             }
           }
@@ -252,6 +274,9 @@
       addCalendarLog: function (){
         this.$gtag.event("addCalendar")
       },
+      showNotes: function(){
+        this.panel = [0]
+      },
     },
     data: function(){
       return {
@@ -259,6 +284,8 @@
         resultJsonText: "",
         resultText: "",
         exposeJsonText: "",
+        explainText: "",
+        panel:[],
       }
     },
     computed : {

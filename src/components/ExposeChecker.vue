@@ -13,19 +13,13 @@
         <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
-          <span class="d-inline-block">約2週間の間にCOCOA上の陽性者登録者との</span>
-          <span class="d-inline-block">接触通知のログを表示します。</span>
+          <span class="d-inline-block">約2週間の間にCOCOAの陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
         </p>
         <p class="my-8 mx-2">
           <span class="d-inline-block">
           使用の際は、下記の注意事項/詳細説明を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
-        </p>
-        <p style="color:red;" class="mb-8">
-          Androidをご利用の方へ:<br>
-          接触通知ログのコピーの仕方が簡単ではないので、現在Android版はBetaとして提供しています。<br>
-          後日簡単に利用できる方法を検討して、方法が見つかり次第、アップデートにて対応予定です。
         </p>
         </div>
       </v-row>
@@ -36,17 +30,25 @@
                 <v-expansion-panel-content class="text-left">
                   <ul>
                     <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOA上の陽性者登録者の端末の近くにいた記録があるかを確認するツールです。</li>
-                    <li>具体的には、接触ログデータの中のMatchCountが0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
+                    <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li>
                     <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li>
-                    <li>このログデータで分かることは、COCOA陽性登録者が付近にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
-                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性者との接触」のログすべてを表示しています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>)</li>
+                    <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li>
+                    <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li>
+                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li>
                   </ul>
                     <v-layout justify-center my-4 >
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
                     </v-layout>
                   <ul>
+                    <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOAのインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li>
+                    <li>接触があった日時は、Hash値を用いて、サイト下部の<a href="https://cacaotest.sakura.ne.jp/" target="_blank" >外部ページ</a>にて24時間の範囲で絞り込み可能です。(iOSのみ)</li>
+                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br>
+                      例えば、COCOAユーザーAさんとの接触検知が9月1日、Aさんの発症が9月4日(潜伏期間3日間)、Aさんの陽性登録が完了したのが9月7日、だったとすると、スマホ内の接触ログデータのTimestampは9月7日以降になりますが、実際の接触はそれより以前(この例だと9月1日)になります。<br>
+                      潜伏期間や、登録までの期間は場合によるので、この方法では正確な日時は特定ができません。
+                    </li>
+                    <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li>
                     <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li>
-                    <li>不具合報告や改善要望などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします</li>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li>
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -64,14 +66,23 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. Androidの接触通知ログを開く</p>
+                  <p class="text-left">
+                    Step1. Androidの接触通知ログをGoogleDriveまたはローカルに保存する<br>
+                    (保存方法/アプリなどの候補が表示されたら、GoogleDriveまたは、ローカルに保存をする)<br>
+                  </p>
+                  <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
+
                   <v-img src="@/assets/images/instruction-android.png" />
                   <br>
-                  <p class="text-left">Step2. 下記入力枠にペーストする</p>
+                  <p class="text-left">
+                    Step2.
+                    GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
+                    [すべて選択]を押し、[コピー]を押す。<br>
+                    (近日中にスクリーンショットを掲載します)
+                  </p>
+                  <p class="text-left">Step3. 下記入力枠にペーストする<br>(近日中にスクリーンショットを掲載します)</p>
                   <p class="text-left" style="color:red;">
-                    接触通知ログファイルのコピー&amp;ペーストがAndroid版だとiOSのように素直にできず、どうすれば簡単にコピー&amp;ペーストできるか調査中です。<br>
-                    GoogleDrive等に一旦保存して、テキストファイルとして開いて、コピー&amp;ペースト等すれば、ログの中身はコピーできるかもしれません。<br>
-                    何か簡単にできる良い方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
+                    より簡単な方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
                   </p>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -83,7 +94,7 @@
       >
         <v-radio-group v-model="os">
           <v-radio key="ios" label="iOS" value="ios"></v-radio>
-          <v-radio key="android" label="Android(β版)" value="android"></v-radio>
+          <v-radio key="android" label="Android" value="android"></v-radio>
         </v-radio-group>
       </v-row>
       <v-row >
@@ -193,9 +204,9 @@
         </p>
         
       </v-col>
-      <v-col>
-        <p>made by <a href="https://twitter.com/ktansai">@ktansai</a></p>
-      </v-col>
+      <v-row class="mt-8 justify-center">
+        <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
+      </v-row>
   </v-container>
 </template>
 

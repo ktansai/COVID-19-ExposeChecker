@@ -13,7 +13,7 @@
         <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
-          <span class="d-inline-block">約2週間の間にCOCOAの陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
+          <span class="d-inline-block">約2週間の間にCOCOAの新規陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
         </p>
         <p class="my-8 mx-2">
           <span class="d-inline-block">
@@ -29,12 +29,12 @@
                 <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
-                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li><br>
+                    <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの新規陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li><br>
                     <li>具体的には、接触ログデータの中のMatchCount(iOS)/matchesCount(Android)の項目が0ではない値(接触が疑われるデータ)を抽出するだけのツールです</li><br>
                     <li>クライアントサイドのJavaScriptで解析を行っているため、ここでペーストしたログデータが外部に送信されるようなことはありません。</li><br>
-                    <li>このログデータで分かることは、COCOA陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li><br>
+                    <li>このログデータで分かることは、COCOAの新規陽性登録者が付近(Bluetoothの電波が届く範囲)にいたことのみで、必ずしも濃厚接触に該当する訳ではありません。</li><br>
                     <li>BluetoothがOFFに設定されている間は、OSが接触検知を行うことができないためご注意ください(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q6-3" target="_blank">厚生労働省FAQ</a>より)</li><br>
-                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知したの陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li><br>
+                    <li>本家COCOAのアプリで通知が来る条件は「1m以内かつ15分以上」ですが、本ツールはその基準よりも広い「OSが検知した新規陽性登録者との接触」のログすべてを対象としています。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00009.html#Q4-7" target="_blank">厚生労働省FAQ</a>より)</li><br>
                   </ul>
                     <v-layout justify-center my-4 >
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
@@ -42,8 +42,8 @@
                   <ul>
                     <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOAのインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li><br>
                     <li>接触があった日時は、Hash値を用いて、サイト下部の<a href="https://cacaotest.sakura.ne.jp/" target="_blank" >外部ページ</a>にて24時間の範囲で絞り込み可能です。(iOSのみ)</li><br>
-                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br><br>
-                      例えば、COCOAユーザーAさんとの接触検知が9月1日、Aさんの発症が9月4日(潜伏期間3日間)、Aさんの陽性登録が完了したのが9月7日、だったとすると、スマホ内の接触ログデータのTimestampは9月7日以降になりますが、実際の接触はそれより以前(この例だと9月1日)になります。<br>
+                    <li>接触通知のログデータ内部のTimestampは、接触のあった日時ではなく、COCOAが新規陽性登録者のリストをダウンロードし、スマホ内で照合を行った日時のようです。つまりこのTimestampより前に接触の可能性があることのみ分かります。<br><br>
+                      例えば、COCOAユーザーAさんとの接触検知が9月1日、Aさんの発症が9月4日(潜伏期間3日間)、Aさんの新規陽性登録が完了したのが9月7日、だったとすると、スマホ内の接触ログデータのTimestampは9月7日以降になりますが、実際の接触はそれより以前(この例だと9月1日)になります。<br>
                       潜伏期間や、登録までの期間は場合によるので、この方法では正確な日時は特定ができません。
                     </li><br>
                     <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
@@ -199,7 +199,7 @@
         class="my-8"
       >
         <h2 class="headline font-weight-bold mb-3">
-          もし陽性登録者と近くにいたことが疑われる場合は、
+          もし新規陽性登録者と近くにいたことが疑われる場合は、
         </h2>
         <p>
           上記Hash値をコピーし、
@@ -223,7 +223,7 @@
       checkJson: function(){
         this.$gtag.event("checkJson")
 
-        const explainTextZeroContact= "本結果はCOCOA上の陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextZeroContact= "本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
 
         try {
           if (this.os === "ios") {
@@ -241,10 +241,10 @@
             });
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
-              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
               this.explainText = explainTextZeroContact
             }else{
-              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
@@ -257,10 +257,10 @@
             }, [])
 
             if (matchedExposures.length === 0) {
-              this.resultText = "陽性登録者が近くにいた記録はありませんでした。"
+              this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
               this.explainText = explainTextZeroContact
             } else {
-              this.resultText = `${matchedExposures.length}件の陽性登録者が近くにいた記録が確認されました。`
+              this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             }
           }

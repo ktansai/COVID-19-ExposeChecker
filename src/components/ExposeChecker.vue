@@ -73,15 +73,18 @@
                   </p>
                   <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
 
-                  <v-img src="@/assets/images/instruction-android.png" />
+                  <v-img src="@/assets/images/instruction-android-01.png" />
                   <br>
                   <p class="text-left">
                     Step2.
                     GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
                     [すべて選択]を押し、[コピー]を押す。<br>
-                    (近日中にスクリーンショットを掲載します)
+                  <v-img src="@/assets/images/instruction-android-02.png" />
                   </p>
-                  <p class="text-left">Step3. 下記入力枠にペーストする<br>(近日中にスクリーンショットを掲載します)</p>
+                  <p class="text-left">Step3. [Android]を選択し、下記入力枠に[貼り付け]を押す
+                    <br>
+                    <v-img src="@/assets/images/instruction-android-03.png" />
+                  </p>
                   <p class="text-left" style="color:red;">
                     より簡単な方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
                   </p>
@@ -203,9 +206,9 @@
         </h2>
         <p>
           上記Hash値をコピーし、
-          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a><br>
+          <a href="https://datastudio.google.com/u/0/reporting/069598a2-3f01-4b51-b023-cdb478992182" target="_blank">接触日シート別冊(別サイト)</a><br>
           または、
-          <a href="https://datastudio.google.com/u/0/reporting/069598a2-3f01-4b51-b023-cdb478992182" target="_blank">接触日シート別冊</a>
+          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
           を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。(iOSのみ)
         </p>
         

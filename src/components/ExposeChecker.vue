@@ -47,8 +47,9 @@
                       潜伏期間や、登録までの期間は場合によるので、この方法では正確な日時は特定ができません。
                     </li><br>
                     <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
+                    <li>本ツールは接触確認アプリの活用事例として厚生労働省HPに掲載いただいております。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html#:~:text=%E3%80%90COCOA%E3%83%AD%E3%82%B0%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC%E3%80%91%E3%81%AE%E3%81%94%E5%88%A9%E7%94%A8%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89" target="_blank">厚生労働省のHP</a>)</li><br>
                     <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>
-                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai" target="_blank">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
                     <li>COCOAログチェッカーは<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>上にソースコードを公開しており、多くの方に提案/指摘をいただきながら作成しています。ご協力いただいている全ての方に多大な感謝を申し上げます。</li>
                   </ul>
                 </v-expansion-panel-content>

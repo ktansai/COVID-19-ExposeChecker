@@ -15,7 +15,7 @@
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
           <span class="d-inline-block">約2週間の間にCOCOAの新規陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
         </p>
-        <p class="my-8 mx-2">
+        <p class="my-8 mx-2" style="color:red;">
           <span class="d-inline-block">
           使用の際は<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
           </span>

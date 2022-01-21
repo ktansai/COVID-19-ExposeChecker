@@ -56,7 +56,7 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>使い方(iOS)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOSの接触通知ログをコピーする</p>
+                  <p class="text-left">Step1. iOSの設定アプリから接触通知ログをコピーする</p>
                   <v-img src="@/assets/images/instruction-ios-01.png" />
                   <br>
                   <p class="text-left">Step2. 下記入力枠にペーストする</p>
@@ -68,8 +68,7 @@
                 <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p class="text-left">
-                    Step1. Androidの接触通知ログをGoogleDriveまたはローカルに保存する<br>
-                    (保存方法/アプリなどの候補が表示されたら、GoogleDriveまたは、ローカルに保存をする)<br>
+                    Step1. Androidの設定アプリから 接触通知ログをGoogleDriveまたはローカルに保存する<br>
                   </p>
                   <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
 

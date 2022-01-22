@@ -71,7 +71,7 @@
                   <p class="text-left">
                     Step1. Androidの設定アプリから 接触通知ログをGoogleDriveまたはローカルに保存する<br>
                   </p>
-                  <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
+                  <p class="text-left text-caption" >接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
 
                   <v-img src="@/assets/images/instruction-android-01.png" />
                   <br>
@@ -84,9 +84,6 @@
                   <p class="text-left">Step3. [Android]を選択し、下記入力枠に[貼り付け]を押す
                     <br>
                     <v-img src="@/assets/images/instruction-android-03.png" />
-                  </p>
-                  <p class="text-left" style="color:red;">
-                    より簡単な方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
                   </p>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -113,7 +110,7 @@
         <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
         <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
       </p>
-      <v-row class="mb-10 justify-center">
+      <v-row class="mb-5 justify-center">
         <v-col cols="6"> 
           <v-btn
                 v-on:click="clearJson">
@@ -130,11 +127,11 @@
       </v-row>
       <v-row class="justify-center">
         <div>
-            <p class="my-10" > 
-              <b>結果:</b> {{resultText}}<br>
+            <p class="my-5 text-left"> 
+              <b>結果:</b> <br> {{resultText}}<br><br>
+              <span v-html="explainText" ></span><br>
             </p>
             <p class="text-caption" style="color:red;" v-if="resultText.length > 0">
-            <span v-html="explainText" ></span><br>
             ログデータや結果に関する説明は、サイト上部の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>をご覧ください。
             </p> 
         </div>
@@ -226,8 +223,8 @@
       checkJson: function(){
         this.$gtag.event("checkJson")
 
-        const explainTextZeroContact= "本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
-
+        const explainTextZeroContact    = "<b>補足説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextNonZeroContact = "<b>補足説明:</b><br>COCOAアプリを開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。"
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)
@@ -248,6 +245,7 @@
               this.explainText = explainTextZeroContact
             }else{
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
+              this.explainText = explainTextNonZeroContact
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)

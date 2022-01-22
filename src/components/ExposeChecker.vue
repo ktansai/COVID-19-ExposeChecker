@@ -49,7 +49,7 @@
                     <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
                     <li>本ツールは接触確認アプリの活用事例として厚生労働省HPに掲載いただいております。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html#:~:text=%E3%80%90COCOA%E3%83%AD%E3%82%B0%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC%E3%80%91%E3%81%AE%E3%81%94%E5%88%A9%E7%94%A8%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89" target="_blank">厚生労働省のHP</a>)</li><br>
                     <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>
-                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai" target="_blank">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>、<a href="https://twitter.com/ktansai" target="_blank">@ktansai</a>または、(<a href='mailto:cocoa.log.checker@gmail.com' target="_blank">cocoa.log.checker@gmail.com</a>)までご連絡ください。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
                     <li>COCOAログチェッカーは<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>上にソースコードを公開しており、多くの方に提案/指摘をいただきながら作成しています。ご協力いただいている全ての方に多大な感謝を申し上げます。</li>
                   </ul>
                 </v-expansion-panel-content>
@@ -71,7 +71,7 @@
                   <p class="text-left">
                     Step1. Androidの設定アプリから 接触通知ログをGoogleDriveまたはローカルに保存する<br>
                   </p>
-                  <p class="text-left" style=color:red;>接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
+                  <p class="text-left text-caption" >接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
 
                   <v-img src="@/assets/images/instruction-android-01.png" />
                   <br>
@@ -84,9 +84,6 @@
                   <p class="text-left">Step3. [Android]を選択し、下記入力枠に[貼り付け]を押す
                     <br>
                     <v-img src="@/assets/images/instruction-android-03.png" />
-                  </p>
-                  <p class="text-left" style="color:red;">
-                    より簡単な方法をご存じの方は<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai">@ktansai</a>まで教えていただけると幸いです。
                   </p>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -113,7 +110,7 @@
         <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
         <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
       </p>
-      <v-row class="mb-10 justify-center">
+      <v-row class="mb-5 justify-center">
         <v-col cols="6"> 
           <v-btn
                 v-on:click="clearJson">
@@ -130,38 +127,13 @@
       </v-row>
       <v-row class="justify-center">
         <div>
-            <p class="my-10" > 
-              <b>結果:</b> {{resultText}}<br>
+            <p class="my-5 text-left"> 
+              <b>結果:</b> <br> {{resultText}}<br><br>
+              <span v-html="explainText" ></span><br>
             </p>
-            <p class="text-caption" style="color:red;" v-if="resultText.length > 0">
-            <span v-html="explainText" ></span><br>
-            ログデータや結果に関する説明は、サイト上部の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>をご覧ください。
-            </p> 
         </div>
       </v-row>
 
-
-      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
-        <div>
-          <v-btn
-            rounded
-            color="#1DA1F2"
-            dark
-            target="_blank"
-            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://cocoa-log-checker.com%0a'+'&hashtags=COCOAログチェッカー'"
-          >
-            <v-icon
-              left
-              dark
-            >
-              mdi-twitter
-            </v-icon>
-            結果を投稿
-            
-          </v-btn>
-          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
-        </div>
-      </v-row>
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
@@ -187,6 +159,29 @@
           </p>
         </div>
       </v-row>
+
+      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
+        <div>
+          <v-btn
+            rounded
+            color="#1DA1F2"
+            dark
+            target="_blank"
+            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://cocoa-log-checker.com%0a'+'&hashtags=COCOAログチェッカー'"
+          >
+            <v-icon
+              left
+              dark
+            >
+              mdi-twitter
+            </v-icon>
+            結果を投稿
+            
+          </v-btn>
+          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
+        </div>
+      </v-row>
+      
       <v-row>
             <v-textarea 
               outlined
@@ -226,7 +221,10 @@
       checkJson: function(){
         this.$gtag.event("checkJson")
 
-        const explainTextZeroContact= "本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者が近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
+
+        const aboutResultText = "<b>本結果に関して:</b><br>本結果を理由に保健所や医療機関等へのご連絡はお控えください。<br>ご不明点がある場合は<a href='#notes' @click='showNotes'>詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)<br>"
 
         try {
           if (this.os === "ios") {
@@ -245,9 +243,10 @@
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
               this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact
+              this.explainText = explainTextZeroContact + "<br><br>" + aboutResultText
             }else{
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
+              this.explainText = explainTextNonZeroContact + "<br><br>" + aboutResultText
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)

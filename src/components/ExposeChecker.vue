@@ -49,7 +49,7 @@
                     <li>現在、このTimestampが誤解を招くため、結果表示から意図的に削除させて頂いています。表示方法などを検討し将来的に表示する予定です。</li><br>
                     <li>本ツールは接触確認アプリの活用事例として厚生労働省HPに掲載いただいております。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html#:~:text=%E3%80%90COCOA%E3%83%AD%E3%82%B0%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC%E3%80%91%E3%81%AE%E3%81%94%E5%88%A9%E7%94%A8%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89" target="_blank">厚生労働省のHP</a>)</li><br>
                     <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>
-                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>または、<a href="https://twitter.com/ktansai" target="_blank">@ktansai</a>までおねがいします。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
+                    <li>不具合報告、改善要望、間違いの指摘、PR、質問などは、<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>、<a href="https://twitter.com/ktansai" target="_blank">@ktansai</a>または、(<a href='mailto:cocoa.log.checker@gmail.com' target="_blank">cocoa.log.checker@gmail.com</a>)までご連絡ください。また、個人で開発しているため、全てに対応できるとは限りません。ご了承ください。</li><br>
                     <li>COCOAログチェッカーは<a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a>上にソースコードを公開しており、多くの方に提案/指摘をいただきながら作成しています。ご協力いただいている全ての方に多大な感謝を申し上げます。</li>
                   </ul>
                 </v-expansion-panel-content>
@@ -131,9 +131,6 @@
               <b>結果:</b> <br> {{resultText}}<br><br>
               <span v-html="explainText" ></span><br>
             </p>
-            <p class="text-caption" style="color:red;" v-if="resultText.length > 0">
-            ログデータや結果に関する説明は、サイト上部の<a href="#notes" @click="showNotes">注意事項/詳細説明</a>をご覧ください。
-            </p> 
         </div>
       </v-row>
 
@@ -224,8 +221,11 @@
       checkJson: function(){
         this.$gtag.event("checkJson")
 
-        const explainTextZeroContact    = "<b>補足説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
-        const explainTextNonZeroContact = "<b>補足説明:</b><br>COCOAアプリを開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。"
+        const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者が近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
+
+        const aboutResultText = "<b>本結果に関して:</b><br>本結果を理由に保健所や医療機関等へのご連絡はお控えください。<br>ご不明点がある場合は<a href='#notes' @click='showNotes'>詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)<br>"
+
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)
@@ -243,10 +243,10 @@
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
               this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact
+              this.explainText = explainTextZeroContact + "<br><br>" + aboutResultText
             }else{
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-              this.explainText = explainTextNonZeroContact
+              this.explainText = explainTextNonZeroContact + "<br><br>" + aboutResultText
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)

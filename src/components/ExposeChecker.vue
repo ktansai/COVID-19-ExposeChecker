@@ -137,28 +137,6 @@
         </div>
       </v-row>
 
-
-      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
-        <div>
-          <v-btn
-            rounded
-            color="#1DA1F2"
-            dark
-            target="_blank"
-            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://cocoa-log-checker.com%0a'+'&hashtags=COCOAログチェッカー'"
-          >
-            <v-icon
-              left
-              dark
-            >
-              mdi-twitter
-            </v-icon>
-            結果を投稿
-            
-          </v-btn>
-          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
-        </div>
-      </v-row>
       <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
         <div>
         <v-btn
@@ -184,6 +162,29 @@
           </p>
         </div>
       </v-row>
+
+      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
+        <div>
+          <v-btn
+            rounded
+            color="#1DA1F2"
+            dark
+            target="_blank"
+            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://cocoa-log-checker.com%0a'+'&hashtags=COCOAログチェッカー'"
+          >
+            <v-icon
+              left
+              dark
+            >
+              mdi-twitter
+            </v-icon>
+            結果を投稿
+            
+          </v-btn>
+          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
+        </div>
+      </v-row>
+      
       <v-row>
             <v-textarea 
               outlined

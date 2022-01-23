@@ -15,9 +15,9 @@
           <span class="d-inline-block">接触通知のログデータを解析し、</span>
           <span class="d-inline-block">約2週間の間にCOCOAの新規陽性登録者が付近にいた可能性がある記録を表示します。(Bluetoothの電波が届く範囲)</span>
         </p>
-        <p class="my-8 mx-2" style="color:red;">
+        <p class="my-8 mx-2" style="color:red;" id="beforeUseNote">
           <span class="d-inline-block">
-          使用の際は<a href="#notes" @click="showNotes">注意事項/詳細説明</a>を読み、
+          使用の際は<a href="#beforeUseNote" @click="showNotes">注意事項/詳細説明</a>を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
         </p>
@@ -129,7 +129,11 @@
         <div>
             <p class="my-5 text-left"> 
               <b>結果:</b> <br> {{resultText}}<br><br>
-              <span v-html="explainText" ></span><br>
+              <span v-html="explainText" ></span><br><br>
+              <span v-if="resultText.length > 0">
+                <b>本結果に関して:</b><br>
+                本結果を理由に保健所や医療機関等へのご連絡はお控えください。<br>
+                ご不明点がある場合は<a href="#beforeUseNote" @click="showNotes">詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)<br></span>
             </p>
         </div>
       </v-row>
@@ -224,8 +228,6 @@
         const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者が近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
         const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
 
-        const aboutResultText = "<b>本結果に関して:</b><br>本結果を理由に保健所や医療機関等へのご連絡はお控えください。<br>ご不明点がある場合は<a href='#notes' @click='showNotes'>詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)<br>"
-
         try {
           if (this.os === "ios") {
             const exposeData = JSON.parse( this.exposeJsonText)
@@ -243,10 +245,10 @@
             this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
             if (matchedExposures.length === 0){
               this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact + "<br><br>" + aboutResultText
+              this.explainText = explainTextZeroContact
             }else{
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-              this.explainText = explainTextNonZeroContact + "<br><br>" + aboutResultText
+              this.explainText = explainTextNonZeroContact
             }
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
@@ -260,11 +262,11 @@
 
             if (matchedExposures.length === 0) {
               this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact + "<br><br>" + aboutResultText
+              this.explainText = explainTextZeroContact 
             } else {
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-              this.explainText = explainTextNonZeroContact + "<br><br>" + aboutResultText
+              this.explainText = explainTextNonZeroContact 
             }
           }
         } catch (error) {

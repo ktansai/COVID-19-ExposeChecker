@@ -260,10 +260,11 @@
 
             if (matchedExposures.length === 0) {
               this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact
+              this.explainText = explainTextZeroContact + "<br><br>" + aboutResultText
             } else {
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
               this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
+              this.explainText = explainTextNonZeroContact + "<br><br>" + aboutResultText
             }
           }
         } catch (error) {

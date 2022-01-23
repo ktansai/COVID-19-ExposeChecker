@@ -132,8 +132,13 @@
               <span v-html="explainText" ></span><br><br>
               <span v-if="resultText.length > 0">
                 <b>本結果に関して:</b><br>
-                本結果を理由に保健所や医療機関等へのご連絡はお控えください。<br>
-                ご不明点がある場合はサイト上部の詳細説明をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)<br> <a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> > 詳細説明を見る </a> </span>
+                <ul>
+                    <li>接触通知アプリ(COCOA)との結果の違いに関しては、<a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> 詳細説明</a>を御覧ください。</li>
+                    <li>本結果を理由に保健所や医療機関等へのご連絡はお控えください。</li>
+                    <li>ご不明点がある場合は<a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> 詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)</li>
+                </ul>
+                <br>
+                <a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> > 詳細説明を見る </a> </span>
             </p>
         </div>
       </v-row>

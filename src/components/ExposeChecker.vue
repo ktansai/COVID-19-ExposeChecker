@@ -241,7 +241,7 @@
             let matchedExposures = []
             exposeDataArray.forEach(checkItem => {
               checkItem.Files.forEach(file => {
-                if(file.MatchCount !== 0){
+                if(file.MatchCount > 0){
                   delete file.Timestamp
                   matchedExposures.push(file)
                 }
@@ -258,7 +258,7 @@
           } else if (this.os === "android") {
             const exposeData = JSON.parse(this.exposeJsonText)
             const matchedExposures = exposeData.reduce((acc, exposure) => {
-              if (exposure.matchesCount !== 0) {
+              if (exposure.matchesCount > 0) {
                 delete exposure.timestamp
                 acc.push(exposure)
               }

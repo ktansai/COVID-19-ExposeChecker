@@ -90,14 +90,6 @@
             </v-expansion-panels>
       </v-row>
 
-      <v-row
-        class="my-4"
-      >
-        <v-radio-group v-model="os">
-          <v-radio key="ios" label="iOS" value="ios"></v-radio>
-          <v-radio key="android" label="Android" value="android"></v-radio>
-        </v-radio-group>
-      </v-row>
       <v-row >
 
             <v-textarea 
@@ -234,8 +226,9 @@
         const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
 
         try {
-          if (this.os === "ios") {
-            const exposeData = JSON.parse( this.exposeJsonText)
+          const exposeData = JSON.parse(this.exposeJsonText)
+          if ("ExposureChecks" in exposeData) {
+            // iOS
             const exposeDataArray = exposeData.ExposureChecks
 
             let matchedExposures = []
@@ -255,8 +248,8 @@
               this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
               this.explainText = explainTextNonZeroContact
             }
-          } else if (this.os === "android") {
-            const exposeData = JSON.parse(this.exposeJsonText)
+          } else if (Array.isArray(exposeData)) {
+            // Android
             const matchedExposures = exposeData.reduce((acc, exposure) => {
               if (exposure.matchesCount > 0) {
                 delete exposure.timestamp
@@ -290,7 +283,6 @@
     },
     data: function(){
       return {
-        os: 'ios',
         resultJsonText: "",
         resultText: "",
         exposeJsonText: "",

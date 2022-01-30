@@ -81,7 +81,7 @@
                     [すべて選択]を押し、[コピー]を押す。<br>
                   <v-img src="@/assets/images/instruction-android-02.png" />
                   </p>
-                  <p class="text-left">Step3. [Android]を選択し、下記入力枠に[貼り付け]を押す
+                  <p class="text-left">Step3. 下記入力枠を選択し、[貼り付け]を押す。
                     <br>
                     <v-img src="@/assets/images/instruction-android-03.png" />
                   </p>

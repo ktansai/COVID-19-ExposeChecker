@@ -90,14 +90,6 @@
             </v-expansion-panels>
       </v-row>
 
-      <v-row
-        class="my-4"
-      >
-        <v-radio-group v-model="os">
-          <v-radio key="ios" label="iOS" value="ios"></v-radio>
-          <v-radio key="android" label="Android" value="android"></v-radio>
-        </v-radio-group>
-      </v-row>
       <v-row >
 
             <v-textarea 
@@ -234,45 +226,33 @@
         const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
 
         try {
-          if (this.os === "ios") {
-            const exposeData = JSON.parse( this.exposeJsonText)
-            const exposeDataArray = exposeData.ExposureChecks
-
-            let matchedExposures = []
-            exposeDataArray.forEach(checkItem => {
-              checkItem.Files.forEach(file => {
-                if(file.MatchCount > 0){
-                  delete file.Timestamp
-                  matchedExposures.push(file)
-                }
-              });
-            });
-            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-            if (matchedExposures.length === 0){
-              this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact
-            }else{
-              this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-              this.explainText = explainTextNonZeroContact
-            }
-          } else if (this.os === "android") {
-            const exposeData = JSON.parse(this.exposeJsonText)
-            const matchedExposures = exposeData.reduce((acc, exposure) => {
-              if (exposure.matchesCount > 0) {
+          const exposeData = JSON.parse(this.exposeJsonText)
+          let matchedExposures
+          if ("ExposureChecks" in exposeData) {
+            // iOS
+            matchedExposures = exposeData.ExposureChecks
+              .flatMap(checkItem => checkItem.Files.filter(file => file.MatchCount > 0))
+              .map(exposure => {
+                delete exposure.Timestamp
+                return exposure
+              })
+          } else if (Array.isArray(exposeData)) {
+            // Android
+            matchedExposures = exposeData
+              .filter(expose => expose.matchesCount > 0)
+              .map(exposure => {
                 delete exposure.timestamp
-                acc.push(exposure)
-              }
-              return acc
-            }, [])
+                return exposure
+              })
+          }
 
-            if (matchedExposures.length === 0) {
-              this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-              this.explainText = explainTextZeroContact 
-            } else {
-              this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-              this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-              this.explainText = explainTextNonZeroContact 
-            }
+          if (matchedExposures.length === 0) {
+            this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
+            this.explainText = explainTextZeroContact 
+          } else {
+            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
+            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
+            this.explainText = explainTextNonZeroContact 
           }
         } catch (error) {
           alert("データフォーマットエラー");
@@ -290,7 +270,6 @@
     },
     data: function(){
       return {
-        os: 'ios',
         resultJsonText: "",
         resultText: "",
         exposeJsonText: "",

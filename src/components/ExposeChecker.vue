@@ -17,7 +17,7 @@
         </p>
         <p class="my-8 mx-2" style="color:red;" id="beforeUseNote">
           <span class="d-inline-block">
-          使用の際は<a href="#beforeUseNote" @click="showNotes">注意事項/詳細説明</a>を読み、
+          使用の際は<a href="#beforeUseNote" @click="showNotes">詳細説明</a>を読み、
           </span>
           <span class="d-inline-block">理解した上でご利用ください。</span>
         </p>
@@ -25,8 +25,8 @@
       </v-row>
       <v-row class="my-8">
         <v-expansion-panels accordion multiple v-model="panel" >
-              <v-expansion-panel id="notes">
-                <v-expansion-panel-header>注意事項/詳細説明</v-expansion-panel-header>
+              <v-expansion-panel id="notes" >
+                <v-expansion-panel-header>詳細説明</v-expansion-panel-header>
                 <v-expansion-panel-content class="text-left">
                   <ul>
                     <li>iOS/Androidで収集されている COVID-19 接触のログデータの中で、COCOAの新規陽性登録者の端末の近くにいた記録があるかを確認するツールです。</li><br>
@@ -117,25 +117,24 @@
         </v-btn>
         </v-col>
       </v-row>
-      <v-row class="justify-center">
-        <div>
+      <v-row class="mt-6 mb-6">
+        <div v-if="resultText.length > 0">
             <p class="my-5 text-left"> 
               <b>結果:</b> <br> {{resultText}}<br><br>
               <span v-html="explainText" ></span><br><br>
-              <span v-if="resultText.length > 0">
+              <span >
                 <b>本結果に関して:</b><br>
                 <ul>
-                    <li>接触通知アプリ(COCOA)との結果の違いに関しては、<a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> 詳細説明</a>を御覧ください。</li>
                     <li>本結果を理由に保健所や医療機関等へのご連絡はお控えください。</li>
-                    <li>ご不明点がある場合は<a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> 詳細説明</a>をご一読の上、解決しない場合は製作者にご連絡ください。(問い合わせ先は詳細説明の中に記載)</li>
+                    <li>ご不明点がある場合は、下記の「よくある質問」をご一読の上、解決しない場合は本サイトの製作者にご連絡ください。<span class="text-small">(<a href='mailto:cocoa.log.checker@gmail.com' target="_blank">cocoa.log.checker@gmail.com</a>)</span></li>
                 </ul>
-                <br>
-                <a href="#beforeUseNote" @click="showNotes" style="text-decoration:none;"> > 詳細説明を見る </a> </span>
+                </span>
             </p>
         </div>
+        <FAQ id="FAQ"/>
       </v-row>
 
-      <v-row class="justify-center mt-10" v-if="resultText.length > 0" >
+      <v-row class="justify-center mt-16" v-if="resultText.length > 0" >
         <div>
         <v-btn
           @click="addCalendarLog"
@@ -204,7 +203,7 @@
           上記Hash値をコピーし、
           <a href="https://datastudio.google.com/u/0/reporting/069598a2-3f01-4b51-b023-cdb478992182" target="_blank">接触日シート別冊(別サイト)</a><br>
           または、
-          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >HASH値より陽性者と近くにいた日を検索するサイト(別サイト)</a>
+          <a href="https://cacaotest.sakura.ne.jp/" target="_blank" >CACAOtest(別サイト)</a>
           を使用して、<br>具体的な近くにいた時間(24時間単位)で特定することができます。(iOSのみ)
         </p>
         
@@ -216,14 +215,19 @@
 </template>
 
 <script>
+  import FAQ from './FAQ';
+
   export default {
     name: 'ExposeChecker',
+    components: {
+      FAQ,
+    },
     methods:{
       checkJson: function(){
         this.$gtag.event("checkJson")
 
-        const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者が近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
-        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策を万全を期すことをおすすめします。"
+        const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
+        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
 
         try {
           const exposeData = JSON.parse(this.exposeJsonText)

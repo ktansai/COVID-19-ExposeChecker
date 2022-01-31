@@ -227,7 +227,7 @@
         this.$gtag.event("checkJson")
 
         const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
-        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いともの推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
+        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いものと推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
 
         try {
           const exposeData = JSON.parse(this.exposeJsonText)

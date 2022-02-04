@@ -50,4 +50,4 @@ iOS/AndroidのOSの接触通知ログを解析するツールです。
 - ご提案がある場合
   - 本リポジトリにて、Pull Requestをお送りいただけると助かります。
   - ユーザビリティや利便性の都合上、全てのPRをマージできるわけではありません。事前にご相談の上 実装いただけますと、手戻りが少ないと考えております。
-  - サンプルデータが[wiki](https://github.com/ktansai/COVID-19-ExposeChecker/wiki)にありますので、こちらのデータで検証などしていだけると助かります。
+  - 接触通知ログのサンプルデータが[wiki](https://github.com/ktansai/COVID-19-ExposeChecker/wiki)にありますので、こちらのデータで検証などしていだけると助かります。

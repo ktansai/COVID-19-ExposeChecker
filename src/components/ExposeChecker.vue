@@ -234,12 +234,26 @@
           let matchedExposures
           if ("ExposureChecks" in exposeData) {
             // iOS
-            matchedExposures = exposeData.ExposureChecks
-              .flatMap(checkItem => checkItem.Files.filter(file => file.MatchCount > 0))
-              .map(exposure => {
-                delete exposure.Timestamp
-                return exposure
-              })
+            const exportVersion = exposeData.ExportVersion || 0;
+            switch (exportVersion) {
+              case 1:
+                matchedExposures = exposeData.ExposureChecks
+                  .filter(checkItem => checkItem.MatchCount > 0)
+                  .map(exposure => {
+                    delete exposure.Timestamp;
+                    return exposure;
+                  });
+                break;
+              case 2:
+              default:
+                matchedExposures = exposeData.ExposureChecks
+                  .flatMap(checkItem => checkItem.Files.filter(file => file.MatchCount > 0))
+                  .map(exposure => {
+                    delete exposure.Timestamp;
+                    return exposure;
+                  });
+                break;
+            }
           } else if (Array.isArray(exposeData)) {
             // Android
             matchedExposures = exposeData

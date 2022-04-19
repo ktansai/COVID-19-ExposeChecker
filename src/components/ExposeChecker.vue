@@ -222,7 +222,7 @@
         <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
       </v-row>
 
-     <COCOA2Dialog />
+     <COCOA2Dialog ref="dialog" />
 
 
   </v-container>
@@ -240,6 +240,14 @@
     },
     methods:{
       checkJson: function(){
+        function checkCOCOA2iOS(matchedExposures){
+          let result = false
+          matchedExposures.flatMap( checkItem => checkItem.Files.forEach( file => {
+              if (!('MatchCount' in file)){ result = true }
+          }))
+          return result
+        }
+
         this.$gtag.event("checkJson")
 
         const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
@@ -262,6 +270,11 @@
                 break;
               case 2:
               default:
+                if(checkCOCOA2iOS(exposeData.ExposureChecks)){
+                  alert("データフォーマットエラー\nCOCOA2.0 (iOS)は非対応になりました。")
+                  this.$refs.dialog.show = true
+                  return 
+                }
                 matchedExposures = exposeData.ExposureChecks
                   .flatMap(checkItem => checkItem.Files.filter(file => file.MatchCount > 0))
                   .map(exposure => {

@@ -221,16 +221,22 @@
       <v-row class="mt-8 justify-center">
         <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
       </v-row>
+
+     <COCOA2Dialog />
+
+
   </v-container>
 </template>
 
 <script>
   import FAQ from './FAQ';
+  import COCOA2Dialog from './Cocoa2Dialog';
 
   export default {
     name: 'ExposeChecker',
     components: {
       FAQ,
+      COCOA2Dialog,
     },
     methods:{
       checkJson: function(){

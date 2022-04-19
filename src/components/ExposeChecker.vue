@@ -88,16 +88,6 @@
                 </v-expansion-panel-content>
             </v-expansion-panel>
             </v-expansion-panels>
-            <v-row class="justify-center" >
-              <div class="my-12 mx-2" style="width:90%">
-                <span style="color:red;">重要なお知らせ</span><br> 
-                <div style="text-align:left">
-                COCOAのアップデート(2.0.0)に伴い、iOSの設定画面から取得できるログデータの仕様が変更になり、アプリのアップデート後に蓄積されたログはCOCOAログチェッカーでの解析が不可能になりました。<br>
-                iOS端末では、アプリのアップデート後に新規陽性者とすれ違っていたとしても、COCOAログチェッカーの結果には反映されませんのでご注意ください。<br>
-                <a target="_blank" href="https://twitter.com/ktansai/status/1512377351950127111" >詳しい説明へ</a>
-                </div>
-              </div>
-            </v-row>
         </v-row>
 
       <v-row >

@@ -407,7 +407,7 @@
           if (checkLogResult["detail"]) {
             this.exposureDateList = Object.keys(checkLogResult["detail"])
               .filter(epochMillis => epochMillis >= fromEpochMillis)
-              .reverse()
+              .sort((a, b) => b - a) // Descending order
             this.exposureDict = checkLogResult["detail"]
           } else {
             this.exposureDateList = []

@@ -228,17 +228,11 @@
   import FAQ from './FAQ';
   import COCOA2Dialog from './Cocoa2Dialog';
 
-  function createExposureWindowKey(exposureWindow){
-    return [
-      exposureWindow["DateMillisSinceEpoch"],
-    ].join("-")
-  }
-
   function createExposureStatistics(exposureWindows){
     let exposureWindowDict = {}
 
     exposureWindows.forEach(ew => {
-      let key = createExposureWindowKey(ew)
+      let key = ew["DateMillisSinceEpoch"]
       let exposureWindowList
     if (key in exposureWindowDict) {
         exposureWindowList = exposureWindowDict[key]

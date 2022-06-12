@@ -234,7 +234,7 @@
     exposureWindows.forEach(ew => {
       let key = ew["DateMillisSinceEpoch"]
       let exposureWindowList
-    if (key in exposureWindowDict) {
+      if (key in exposureWindowDict) {
         exposureWindowList = exposureWindowDict[key]
       } else {
         exposureWindowList = []
@@ -242,7 +242,7 @@
 
       exposureWindowList.push(ew)
       exposureWindowDict[key] = exposureWindowList
-    });
+    })
 
     return exposureWindowDict
   }
@@ -272,8 +272,7 @@
             "detailText": null,
           }
 
-          let count = Object.keys(exposureDict).length
-          if (count === 0) {
+          if (Object.keys(exposureDict).length === 0) {
             result["text"] = "新規陽性登録者が近くにいた記録はありませんでした。"
             result["explain"] = explainTextZeroContact
           } else {
@@ -282,16 +281,16 @@
 
             let detail = {};
             Object.keys(exposureDict).map(dateMillsSinceEpoch => {
-              const exposrueWindows = exposureDict[dateMillsSinceEpoch];
+              const exposrueWindows = exposureDict[dateMillsSinceEpoch]
 
-              let dateTimeUtc = new Date(0);
-              dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch);
+              let dateTimeUtc = new Date(0)
+              dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch)
               let localDate = dateToString(dateTimeUtc)
               detail[dateMillsSinceEpoch] = {
                 "local_date": localDate,
                 "exposrue_windows": exposrueWindows,
               }
-            });
+            })
 
             result["detail"] = detail
             result["detailText"] = JSON.stringify(

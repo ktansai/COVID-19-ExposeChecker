@@ -279,7 +279,7 @@
             result["text"] = "新規陽性登録者が近くにいた記録が確認されました。"
             result["explain"] = explainTextNonZeroContact
 
-            let detail = {};
+            let detail = {}
             Object.keys(exposureDict).map(dateMillsSinceEpoch => {
               const exposrueWindows = exposureDict[dateMillsSinceEpoch]
 
@@ -301,7 +301,7 @@
             )
           }
 
-          return result;
+          return result
         }
         function checkLegacyLog(exposeData){
           function checkCOCOA2iOS(matchedExposures){

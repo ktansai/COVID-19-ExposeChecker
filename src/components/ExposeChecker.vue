@@ -120,7 +120,13 @@
       <v-row class="mt-6 mb-6">
         <div v-if="resultText.length > 0">
             <p class="my-5 text-left"> 
-              <b>結果:</b> <br> {{resultText}}<br><br>
+              <b>結果:</b> <br> {{resultText}}<br>
+              <ul>
+                <li v-for="date in exposureDateList" :key="date.id">
+                  {{ exposureDict[date]["local_date"] }}
+                </li>
+              </ul>
+              <br>
               <span v-html="explainText" ></span><br><br>
               <span >
                 <b>本結果に関して:</b><br>
@@ -222,6 +228,29 @@
   import FAQ from './FAQ';
   import COCOA2Dialog from './Cocoa2Dialog';
 
+  function createExposureStatistics(exposureWindows){
+    let exposureWindowDict = {}
+
+    exposureWindows.forEach(ew => {
+      let key = ew["DateMillisSinceEpoch"]
+      let exposureWindowList
+      if (key in exposureWindowDict) {
+        exposureWindowList = exposureWindowDict[key]
+      } else {
+        exposureWindowList = []
+      }
+
+      exposureWindowList.push(ew)
+      exposureWindowDict[key] = exposureWindowList
+    })
+
+    return exposureWindowDict
+  }
+
+  function dateToString(dateTimeUtc){
+    return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日`
+  }
+
   export default {
     name: 'ExposeChecker',
     components: {
@@ -230,21 +259,62 @@
     },
     methods:{
       checkJson: function(){
-        function checkCOCOA2iOS(matchedExposures){
-          let result = false
-          matchedExposures.flatMap( checkItem => checkItem.Files.forEach( file => {
-              if (!('MatchCount' in file)){ result = true }
-          }))
+        function checkCOCOALog(exposureData){
+          let exposureDict = createExposureStatistics(exposureData["exposure_windows"])
+
+          const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
+          const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いものと推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
+
+          let result = {
+            "text": null,
+            "explain": null,
+            "detail": null,
+            "detailText": null,
+          }
+
+          if (Object.keys(exposureDict).length === 0) {
+            result["text"] = "新規陽性登録者が近くにいた記録はありませんでした。"
+            result["explain"] = explainTextZeroContact
+          } else {
+            result["text"] = "新規陽性登録者が近くにいた記録が確認されました。"
+            result["explain"] = explainTextNonZeroContact
+
+            let detail = {}
+            Object.keys(exposureDict).map(dateMillsSinceEpoch => {
+              const exposrueWindows = exposureDict[dateMillsSinceEpoch]
+
+              let dateTimeUtc = new Date(0)
+              dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch)
+              let localDate = dateToString(dateTimeUtc)
+              detail[dateMillsSinceEpoch] = {
+                "local_date": localDate,
+                "exposrue_windows": exposrueWindows,
+              }
+            })
+
+            result["detail"] = detail
+            result["detailText"] = JSON.stringify(
+                Object.keys(detail)
+                  .map(dateMillsSinceEpoch => detail[dateMillsSinceEpoch]),
+                null,
+                2
+            )
+          }
+
           return result
         }
+        function checkLegacyLog(exposeData){
+          function checkCOCOA2iOS(matchedExposures){
+            let result = false
+            matchedExposures.flatMap( checkItem => checkItem.Files.forEach( file => {
+                if (!('MatchCount' in file)){ result = true }
+            }))
+            return result
+          }
 
-        this.$gtag.event("checkJson")
+          const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
+          const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いものと推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
 
-        const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
-        const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いものと推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
-
-        try {
-          const exposeData = JSON.parse(this.exposeJsonText)
           let matchedExposures
           if ("ExposureChecks" in exposeData) {
             // iOS
@@ -283,17 +353,64 @@
               })
           }
 
-          if (matchedExposures.length === 0) {
-            this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-            this.explainText = explainTextZeroContact 
-          } else {
-            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-            this.explainText = explainTextNonZeroContact 
+          let result = {
+            "text": null,
+            "explain": null,
+            "detail": null,
+            "detailText": null,
           }
+
+          if (matchedExposures.length === 0) {
+            result["text"] = "新規陽性登録者が近くにいた記録はありませんでした。"
+            result["explain"] = explainTextZeroContact
+            result["detailText"] = ""
+          } else {
+            result["text"] = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
+            result["explain"] = explainTextNonZeroContact
+            result["detailText"] = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
+          }
+
+          return result
+        }
+
+        this.$gtag.event("checkJson")
+
+        try {
+          const exposeData = JSON.parse(this.exposeJsonText)
+
+          const fromDate = new Date()
+          fromDate.setDate(fromDate.getDate() - 14)
+          const fromEpochMillis = fromDate.getTime()
+
+          let checkLogResult
+
+          if ("exposure_windows" in exposeData) {
+            checkLogResult = checkCOCOALog(exposeData)
+          } else if ("ExposureChecks" in exposeData || Array.isArray(exposeData)) {
+            checkLogResult = checkLegacyLog(exposeData)
+          } else {
+            alert("ログのフォーマットが異なります")
+            return
+          }
+
+          this.resultText = checkLogResult["text"]
+          this.explainText = checkLogResult["explain"]
+          this.resultJsonText = checkLogResult["detailText"]
+
+          if (checkLogResult["detail"]) {
+            this.exposureDateList = Object.keys(checkLogResult["detail"])
+              .filter(epochMillis => epochMillis >= fromEpochMillis)
+              .sort((a, b) => b - a) // Descending order
+            this.exposureDict = checkLogResult["detail"]
+          } else {
+            this.exposureDateList = []
+            this.exposureDict = {}
+          }
+
         } catch (error) {
           alert("データフォーマットエラー");
         }
+
       },
       clearJson: function(){
         this.exposeJsonText = ""
@@ -311,6 +428,8 @@
         resultText: "",
         exposeJsonText: "",
         explainText: "",
+        exposureDateList: {},
+        exposureDict: {},
         panel:[],
       }
     },

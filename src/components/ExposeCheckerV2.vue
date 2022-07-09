@@ -2,12 +2,12 @@
   <v-container class="text-center px-8">
       <v-row class="mt-8 justify-center" >
         <div>
-        <router-link to="/beta">v2はこちら</router-link>
-
         <h1 class="display-2 font-weight-bold my-2">
-          <span class="d-inline-block">COCOAログ</span><span class="d-inline-block">チェッカー</span>
+          <span class="d-inline-block">COCOAログ</span><span class="d-inline-block">チェッカー2.0(β)</span>
         </h1>
         <p>接触通知ログ解析ツール</p>
+
+        <router-link to="/">ver1.0はこちら</router-link>
         </div>
       </v-row>
       <v-row class="justify-center">
@@ -220,7 +220,7 @@
         <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
       </v-row>
 
-     <COCOA2Dialog ref="dialog" />
+     <!-- <COCOA2Dialog ref="dialog" /> -->
 
 
   </v-container>
@@ -228,7 +228,7 @@
 
 <script>
   import FAQ from './FAQ';
-  import COCOA2Dialog from './Cocoa2Dialog';
+  // import COCOA2Dialog from './Cocoa2Dialog';
 
   function createExposureStatistics(exposureWindows){
     let exposureWindowDict = {}
@@ -254,10 +254,10 @@
   }
 
   export default {
-    name: 'ExposeChecker',
+    name: 'ExposureCheckerV2',
     components: {
       FAQ,
-      COCOA2Dialog,
+      // COCOA2Dialog,
     },
     methods:{
       checkJson: function(){

@@ -26,15 +26,6 @@
         </span>
       </v-btn>
       </div>
-
-      <!-- <v-btn
-        href="https://github.com/ktansai/COVID-19-ExposeChecker"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">github</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn> -->
     </v-app-bar>
     <v-dialog
       v-model="dialog"
@@ -80,19 +71,20 @@
       </v-card>
     </v-dialog>
     <v-main>
-      <ExposeChecker/>
+      
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import ExposeChecker from './components/ExposeChecker';
+// import ExposeChecker from './components/ExposeChecker';
 
 export default {
   name: 'App',
 
   components: {
-    ExposeChecker,
+    // ExposeChecker,
   },
 
   data: () => ({

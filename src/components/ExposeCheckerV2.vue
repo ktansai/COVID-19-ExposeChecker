@@ -121,7 +121,7 @@
               <b>結果:</b> <br> {{resultText}}<br>
               <ul>
                 <li v-for="date in exposureDateList" :key="date.id">
-                  {{ exposureDict[date]["local_date"] }}
+                  {{ exposureDict[date]["local_date"] }} : {{ exposureDict[date]["daily_count"] +"件" }}
                 </li>
               </ul>
               <br>
@@ -251,31 +251,31 @@
             result["text"] = "新規陽性登録者が近くにいた記録はありませんでした。"
             result["explain"] = explainTextZeroContact
           } else {
-            result["text"] = "新規陽性登録者が近くにいた記録が確認されました。"
             result["explain"] = explainTextNonZeroContact
 
             let detail = {}
+            let countSum = 0
+
             Object.keys(exposureDict).map(dateMillsSinceEpoch => {
               const exposrueWindows = exposureDict[dateMillsSinceEpoch]
 
               let dateTimeUtc = new Date(0)
               dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch)
               let localDate = dateToString(dateTimeUtc)
+              let dailyCount = exposrueWindows.length
+
               detail[dateMillsSinceEpoch] = {
                 "local_date": localDate,
                 "exposrue_windows": exposrueWindows,
+                "daily_count": dailyCount
               }
+              countSum += dailyCount
             })
 
             result["detail"] = detail
-            result["detailText"] = JSON.stringify(
-                Object.keys(detail)
-                  .map(dateMillsSinceEpoch => detail[dateMillsSinceEpoch]),
-                null,
-                2
-            )
+            result["detailText"] = "" 
+            result["text"] = `${countSum}件の新規陽性登録者が近くにいた記録が確認されました。`
           }
-
           return result
         }
         function checkLegacyLog(exposeData){
@@ -354,7 +354,7 @@
           const exposeData = JSON.parse(this.exposeJsonText)
 
           const fromDate = new Date()
-          fromDate.setDate(fromDate.getDate() - 14)
+          fromDate.setDate(fromDate.getDate() - 3000)
           const fromEpochMillis = fromDate.getTime()
 
           let checkLogResult
@@ -364,7 +364,7 @@
           } else if ("ExposureChecks" in exposeData || Array.isArray(exposeData)) {
             checkLogResult = checkLegacyLog(exposeData)
           } else {
-            alert("ログのフォーマットが異なります")
+            alert("データフォーマットエラー")
             return
           }
 
@@ -384,6 +384,7 @@
 
         } catch (error) {
           alert("データフォーマットエラー");
+          console.log(error)
         }
 
       },

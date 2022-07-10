@@ -10,7 +10,7 @@
       </v-row>
       <v-row class="justify-center">
         <div>
-        <router-link to="/beta">ver 2.0 (β版)はこちら→</router-link>
+        <!-- <router-link to="/beta">ver 2.0 (β版)はこちら→</router-link> -->
 
         <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>

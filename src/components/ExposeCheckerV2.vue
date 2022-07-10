@@ -164,13 +164,13 @@
         </div>
       </v-row>
 
-      <!-- Betaでは、Twitterの機能コメントアウト -->
-      <!-- <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
+      <!-- Betaでは、Twitterの機能 は disable -->
+      <v-row class="justify-center my-8" v-if="this.resultText.length > 0" > 
         <div>
           <v-btn
             rounded
+            disabled
             color="#1DA1F2"
-            dark
             target="_blank"
             v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta'+'&hashtags=COCOAログチェッカー'"
           >
@@ -183,9 +183,9 @@
             結果を投稿
             
           </v-btn>
-          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
+          <p class="mt-4 text-caption">Beta版では、Twitterへの投稿機能はOFFとしています。正式版で復活予定です</p>
         </div>
-      </v-row> -->
+      </v-row>
 
       <v-col
         cols="12"

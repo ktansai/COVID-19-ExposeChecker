@@ -201,7 +201,7 @@
 </template>
 
 <script>
-  import FAQ from './FAQ';
+  import FAQ from './FAQ-v2';
 
   function createExposureStatistics(exposureWindows){
     let exposureWindowDict = {}

@@ -23,6 +23,17 @@
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
+
+      <v-expansion-panel>
+        <v-expansion-panel-header class="accordion-header">
+          COCOAログチェッカー2.0は前と比べて何が違いますか？
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          バージョン1.0は、Android/iOSの設定アプリからエクスポートできるログデータを解析していましたが、<br>
+          バージョン2.0では、COCOAアプリからエクスポートできるログデータを解析するものとなっています。
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
       <v-expansion-panel>
         <v-expansion-panel-header class="accordion-header">
           数日間外出を自粛していて接触の心当たりがありませんが、結果の数字が増えています。どうしてですか？
@@ -41,6 +52,21 @@
           昨日すれ違った方が
           COCOAでの陽性登録がまだだった場合、結果にはすぐに反映されません。<br />
           1週間後になって結果が急激に増えることもあります。
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+       <v-expansion-panel>
+        <v-expansion-panel-header class="accordion-header">
+          今後の開発の予定は？
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          以下の機能の追加やリリースを考えています。
+          <ul>
+            <li>COCOAログチェッカー2.0の正式リリース</li>
+            <li>2週間より前に遡るデータの解析</li>
+            <li>グラフ等での見やすい表示</li>
+          </ul>
+
         </v-expansion-panel-content>
       </v-expansion-panel>
 

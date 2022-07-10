@@ -196,12 +196,13 @@
         <p>made by <a href="https://twitter.com/ktansai">@ktansai</a> / <a href="https://github.com/ktansai/COVID-19-ExposeChecker" target="_blank">github</a></p>
       </v-row>
 
-
+  <CocoaLogCheckerV2Dialog />
   </v-container>
 </template>
 
 <script>
   import FAQ from './FAQ-v2';
+  import CocoaLogCheckerV2Dialog from './CocoaLogCheckerV2Dialog.vue'
 
   function createExposureStatistics(exposureWindows){
     let exposureWindowDict = {}
@@ -230,7 +231,7 @@
     name: 'ExposureCheckerV2',
     components: {
       FAQ,
-      // COCOA2Dialog,
+      CocoaLogCheckerV2Dialog,
     },
     methods:{
       checkJson: function(){

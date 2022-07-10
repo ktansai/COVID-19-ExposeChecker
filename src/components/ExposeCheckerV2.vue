@@ -70,7 +70,7 @@
 
 
                   <p class="text-left text-caption" >接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
-                  <p style="color:red;">(COCOAアプリのスクリーンショットは後日追加します)</p>
+                  <p style="color:red;">(スクリーンショットは後日追加します)</p>
                   <!-- <v-img src="@/assets/images/instruction-android-01.png" /> -->
                   <br>
                   <p class="text-left">
@@ -164,14 +164,15 @@
         </div>
       </v-row>
 
-      <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
+      <!-- Betaでは、Twitterの機能コメントアウト -->
+      <!-- <v-row class="justify-center my-8" v-if="resultText.length > 0" > 
         <div>
           <v-btn
             rounded
             color="#1DA1F2"
             dark
             target="_blank"
-            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https://cocoa-log-checker.com%0a'+'&hashtags=COCOAログチェッカー'"
+            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta'+'&hashtags=COCOAログチェッカー'"
           >
             <v-icon
               left
@@ -184,18 +185,8 @@
           </v-btn>
           <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
         </div>
-      </v-row>
-      
-      <v-row>
-            <v-textarea 
-              outlined
-              auto-grow
-              readonly
-              label="ここに詳細な結果のデータが出ます"
-              v-bind:value=resultJsonText 
-              class="my-4">
-            </v-textarea>
-      </v-row>
+      </v-row> -->
+
       <v-col
         cols="12"
         class="my-8"

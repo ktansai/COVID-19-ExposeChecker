@@ -3,15 +3,15 @@
     
 
     <v-card>
-      <v-card-title class="text-h5 green darken-1 white--text">
+      <v-card-title class="text-h6 blue lighten-2 white--text">
         COCOAログチェッカー2.0(β)について
       </v-card-title>
 
-      <v-card-text class="my-8">
+      <v-card-text class="my-4">
         <div class="text--primary">
           <ul>
-          <li>COCOAログチェッカーは、実験的にCOCOAアプリのログデータへの対応開始しました。</li>
-          <li>使い方が大きく変わりましたので、使い方を再度ご覧ください。</li>
+          <li>COCOAログチェッカーは、実験的にCOCOAアプリ(2.0.1以上)のログデータへの対応開始しました。</li>
+          <li>使い方が大きく変わりましたので、以前からお使いの方も使い方を再度ご覧ください。</li>
           <li>バージョン2.0は、OSの設定アプリからエクスポートできるログデータ(旧ログデータ)には対応していません。</li>
           <li>一部開発中でもあり、動作が不安定だったり、正しくない結果が出る場合があります。</li>
           <li>もし、何かお気づきのことがありましたら、<br>

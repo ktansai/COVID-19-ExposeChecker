@@ -2,12 +2,12 @@
   <v-container class="text-center px-8">
       <v-row class="mt-8 justify-center" >
         <div>
-        <h1 class="display-2 font-weight-bold my-2">
+        <h1 class="display-1 font-weight-bold my-2">
           <span class="d-inline-block">COCOAログ</span><span class="d-inline-block">チェッカー2.0 (β)</span>
         </h1>
         <p>接触通知ログ解析ツール</p>
 
-        <router-link to="/">ver1.0はこちら</router-link>
+        <router-link to="/">旧バージョン(ver1.0)はこちら</router-link>
         </div>
       </v-row>
       <v-row class="justify-center">
@@ -52,7 +52,7 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>使い方(iOS)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOSの設定アプリから接触通知ログをコピーする</p>
+                  <p class="text-left">Step1. COCOAアプリからログデータをコピーする</p>
                   <v-img src="@/assets/images/instruction-cocoa2-ios-01.png"/>
 
                   <br>
@@ -65,19 +65,18 @@
                 <v-expansion-panel-header>使い方(Android)</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p class="text-left">
-                    Step1. COCOAアプリを開き、[<b>陽性登録者との接触結果を確認</b>]から、[<b>情報を保存</b>]をタップし、GoogleDriveまたはローカルに保存する<br>
+                    Step1. COCOAアプリを開き、ログデータをGoogleDriveまたはローカルに保存する<br>
                   </p>
 
 
                   <p class="text-left text-caption" >接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
-                  <p style="color:red;">(スクリーンショットは後日追加します)</p>
-                  <!-- <v-img src="@/assets/images/instruction-android-01.png" /> -->
+                  <v-img src="@/assets/images/instruction-cocoa2-android-01.png" />
                   <br>
                   <p class="text-left">
                     Step2.
                     GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
                     [すべて選択]を押し、[コピー]を押す。<br>
-                  <v-img src="@/assets/images/instruction-android-02.png" />
+                  <v-img src="@/assets/images/instruction-cocoa2-android-02.png" />
                   </p>
                   <p class="text-left">Step3. 下記入力枠を選択し、[貼り付け]を押す。
                     <br>
@@ -138,41 +137,14 @@
         <FAQ id="FAQ"/>
       </v-row>
 
-      <v-row class="justify-center mt-16" v-if="resultText.length > 0" >
-        <div>
-        <v-btn
-          @click="addCalendarLog"
-          rounded
-          color="gray"
-          dark
-          target="_blank"
-          v-bind:href="`https://calendar.google.com/calendar/render?action=TEMPLATE&text=[リマインド]:COCOAログチェッカー&details=<a href='https://cocoa-log-checker.com'>COCOAログチェッカー</a>%0D%0A%0D%0A保存の際は%0D%0A・予定の繰り返し設定%0D%0A・通知設定%0D%0Aを有効にするのをおすすめします&dates=${nextDate}`"
-        >
-        <v-icon
-              left
-              dark
-            >
-              mdi-calendar
-        </v-icon>
-          予定に追加
-        </v-btn>
-        <p class="text-caption my-4">
-          <span class="d-inline-block">スマートフォン内のログは14日間しか残りません。</span><br>
-          <span class="d-inline-block">上のボタンを押すとGoogleカレンダーに</span>
-          <span class="d-inline-block">リマインドの予定を追加できます。</span>
-          </p>
-        </div>
-      </v-row>
-
-      <!-- Betaでは、Twitterの機能 は disable -->
       <v-row class="justify-center my-8" v-if="this.resultText.length > 0" > 
         <div>
           <v-btn
             rounded
-            disabled
+            dark
             color="#1DA1F2"
             target="_blank"
-            v-bind:href="'https://twitter.com/intent/tweet?text='+'接触通知ログを解析した結果、%0a'+resultText+'%0a%0a'+'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta'+'&hashtags=COCOAログチェッカー'"
+            v-bind:href="'https://twitter.com/intent/tweet?text='+'COCOAのログデータを解析した結果、%0a'+resultText+'%0a%0a'+'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta'+'%0a%23COCOAログチェッカー'"
           >
             <v-icon
               left
@@ -183,7 +155,7 @@
             結果を投稿
             
           </v-btn>
-          <p class="mt-4 text-caption">Beta版では、Twitterへの投稿機能はOFFとしています。正式版で復活予定です</p>
+          <p class="mt-4 text-caption">※Twitterに遷移します<br>(上記のボタンを押してもすぐには投稿されません)</p>
         </div>
       </v-row>
 
@@ -283,7 +255,7 @@
           if ("exposure_windows" in exposeData) {
             checkLogResult = checkCOCOALog(exposeData)
           } else if ("ExposureChecks" in exposeData || Array.isArray(exposeData)) {
-            alert("COCOAログチェッカーv1をご利用ください")
+            alert("COCOAログチェッカー2.0では設定画面からエクスポートできるログデータの解析をサポートしていません。旧バージョンをご利用ください")
             return 
           } else {
             alert("データフォーマットエラー")
@@ -319,9 +291,6 @@
       },
       clearJson: function(){
         this.exposeJsonText = ""
-      },
-      addCalendarLog: function (){
-        this.$gtag.event("addCalendar")
       },
       showNotes: function(){
         this.panel = [0]

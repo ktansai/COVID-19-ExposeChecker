@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="deep-orange lighten-2"
+      :color= this.themeColor
       dark
     >
       <div v-if="!$vuetify.breakpoint.xs">
@@ -88,8 +88,24 @@ export default {
   },
 
   data: () => ({
-    dialog: false
-    //
+    dialog: false,
   }),
-};
+  computed : {
+    themeColor : function(){
+      let color 
+      switch(this.$route.name){
+        case "CocoaLogChecker1":
+          color = "deep-orange lighten-2" 
+        break;
+
+        case "CocoaLogChecker2":
+          color = "blue lighten-2"
+        break;
+      }
+    return color
+    }
+  }
+}
+
+
 </script>

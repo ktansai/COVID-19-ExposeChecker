@@ -6,12 +6,13 @@
           <span class="d-inline-block">COCOAログ</span><span class="d-inline-block">チェッカー</span>
         </h1>
         <p>接触通知ログ解析ツール</p>
+
+        <router-link to="/beta">COCOAログチェッカー2.0 (β版)に切り替える</router-link>
+
         </div>
       </v-row>
       <v-row class="justify-center">
         <div>
-        <!-- <router-link to="/beta">ver 2.0 (β版)はこちら→</router-link> -->
-
         <p class="my-8 mx-2">
           <span class="d-inline-block">iOS/Androidの設定アプリから閲覧できる</span>
           <span class="d-inline-block">接触通知のログデータを解析し、</span>

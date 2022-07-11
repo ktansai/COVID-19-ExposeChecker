@@ -10,29 +10,27 @@
     </template> -->
 
     <v-card>
-      <v-card-title class="text-h5 deep-orange darken-1 white--text">
-        COCOA2.0に関するお知らせ
+      <v-card-title class="text-h6 deep-orange darken-1 white--text">
+        COCOAログチェッカー2.0(β)<br>に関するご案内
       </v-card-title>
 
       <v-card-text class="my-8">
         <div class="text--primary">
-          厚生労働省
-          接触確認アプリ(COCOA)のアップデート(2.0.0)に伴い、iOSの設定画面から取得できるログデータの形式が変更になり、
-          COCOA2.0へのアップデート後は当サイトでのログデータの解析が不可能になりました。<br /><br />
+          (2022/07/12更新)<br>
+          厚生労働省 接触確認アプリ COCOA のアップデート(2.0.1)により、
+          COCOAアプリからログデータを出力する機能が追加されました。(iOS/Android)<br>
+          本サイトでは、このログデータの解析に対応を開始しています。<br>
+          <br>
 
-          以下の方々は引き続きご利用いただけます。<br />
-          <ul>
-            <li>Android端末をご利用の方</li>
-            <li>iOS端末で、古いバージョンのCOCOAをご利用の方</li>
-          </ul>
-          <br />
-          iOSユーザーの方に向けては、今後、別の提供方法などを模索しています。<br />
-          再度利用可能になるなど、アップデートありましたら、
+          下記からベータ版が利用可能です。<br>
+
+          <router-link to="/beta">COCOAログチェッカー2.0 (β版)に切り替える</router-link>
+          <br>
+          <br>
+          アップデート等のお知らせは引き続き、下記Twitterアカウントから行います。<br>
           <a target="_blank" href="https://twitter.com/CocoaLogChecker"
             >お知らせアカウント(Twitter)</a
           >
-          でお知らせします。
-          <br /><br />
         </div>
       </v-card-text>
 

@@ -7,7 +7,7 @@
         </h1>
         <p>接触通知ログ解析ツール</p>
 
-        <router-link to="/beta">COCOAログチェッカー2.0 (β版)はこちらから</router-link>
+        <router-link to="/beta">COCOAログチェッカー2.0 (β版)に切り替える</router-link>
 
         </div>
       </v-row>

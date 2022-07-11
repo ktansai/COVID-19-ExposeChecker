@@ -70,14 +70,13 @@
 
 
                   <p class="text-left text-caption" >接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。</p>
-                  <p style="color:red;">(スクリーンショットは後日追加します)</p>
-                  <!-- <v-img src="@/assets/images/instruction-android-01.png" /> -->
+                  <v-img src="@/assets/images/instruction-cocoa2-android-01.png" />
                   <br>
                   <p class="text-left">
                     Step2.
                     GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
                     [すべて選択]を押し、[コピー]を押す。<br>
-                  <v-img src="@/assets/images/instruction-android-02.png" />
+                  <v-img src="@/assets/images/instruction-cocoa2-android-02.png" />
                   </p>
                   <p class="text-left">Step3. 下記入力枠を選択し、[貼り付け]を押す。
                     <br>

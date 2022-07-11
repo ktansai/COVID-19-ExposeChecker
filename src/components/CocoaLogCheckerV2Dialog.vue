@@ -3,7 +3,7 @@
     
 
     <v-card>
-      <v-card-title class="text-h5 green darken-1 white--text">
+      <v-card-title class="text-h5 blue lighten-2 white--text">
         COCOAログチェッカー2.0(β)について
       </v-card-title>
 

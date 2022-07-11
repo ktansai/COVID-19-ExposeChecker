@@ -52,7 +52,7 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>使い方(iOS)</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <p class="text-left">Step1. iOSの設定アプリから接触通知ログをコピーする</p>
+                  <p class="text-left">Step1. COCOAアプリから接触通知ログをコピーする</p>
                   <v-img src="@/assets/images/instruction-cocoa2-ios-01.png"/>
 
                   <br>

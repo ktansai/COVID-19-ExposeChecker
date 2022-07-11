@@ -255,7 +255,7 @@
           if ("exposure_windows" in exposeData) {
             checkLogResult = checkCOCOALog(exposeData)
           } else if ("ExposureChecks" in exposeData || Array.isArray(exposeData)) {
-            alert("COCOAログチェッカーv1をご利用ください")
+            alert("COCOAログチェッカー2.0では設定画面からエクスポートできるログデータの解析をサポートしていません。旧バージョンをご利用ください")
             return 
           } else {
             alert("データフォーマットエラー")

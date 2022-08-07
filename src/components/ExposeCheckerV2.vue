@@ -162,6 +162,18 @@
                 </template>
               </v-simple-table>
             </p>
+            <br>
+            <div align="left">
+              <span v-html="explainText" ></span><br><br>
+              <span >
+                <b>本結果に関して:</b><br>
+                <ul>
+                    <li>本結果を理由に保健所や医療機関等へのご連絡はお控えください。</li>
+                    <li>ご不明点がある場合は、下記の「よくある質問」をご一読の上、解決しない場合は本サイトの製作者にご連絡ください。<span class="text-small">(<a href='mailto:cocoa.log.checker@gmail.com' target="_blank">cocoa.log.checker@gmail.com</a>)</span></li>
+                </ul>
+                </span>
+                </div>
+
         </div>
       </v-row>
       <FAQ id="FAQ"/>

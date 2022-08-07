@@ -136,10 +136,10 @@
       <v-row class="mt-6 mb-6">
         <div v-if="resultText.length > 0">
             <p class="my-5 text-left"> 
-              <b>結果:</b> <br> {{resultText}}<br> (※結果は2週間前までのログデータを対象にしています)<br><br>
+              <b>結果:</b> <br> {{resultText}}<br> (※結果は2週間以内を表示)<br><br>
               <ul>
-                <li v-for="date in exposureDateList" :key="date.id">
-                  {{ exposureDict[date]["local_date"] }} : {{ exposureDict[date]["daily_count"] +"件" }}
+                <li v-for="date in exposureDateList" :key="date.id" >
+                  {{ exposureDict[date]["local_date"] }}(<span :style="{ color : exposureDict[date]['day_color']}">{{exposureDict[date]['local_day']}}</span>) : {{ exposureDict[date]["daily_count"] +"件"}}
                 </li>
               </ul>
               <br>
@@ -215,8 +215,22 @@
   }
 
   function dateToString(dateTimeUtc){
-    let day_jp = ['日', '月', '火', '水', '木', '金', '土']
-    return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日 (${day_jp[dateTimeUtc.getDay()]})`
+    return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日`
+  }
+
+  function dayToString(dateTimeUtc){
+    const dayStringMap = [ "日", "月", "火", "水", "木", "金", "土" ]
+    return dayStringMap[dateTimeUtc.getDay()]
+  }
+
+  function getDayColor(day){
+    if(day == 0){
+      return "#F44336"
+    }
+    if(day == 6){
+      return "#3F51B5"
+    }
+    return "#000000"
   }
 
   export default {
@@ -244,10 +258,13 @@
             let dateTimeUtc = new Date(0)
             dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch)
             let localDate = dateToString(dateTimeUtc)
+            let localDay = dayToString(dateTimeUtc)
             let dailyCount = exposrueWindows.length
 
             detail[dateMillsSinceEpoch] = {
               "local_date": localDate,
+              "local_day" : localDay,
+              "day_color": getDayColor(dateTimeUtc.getDay()),
               "exposrue_windows": exposrueWindows,
               "daily_count": dailyCount
             }

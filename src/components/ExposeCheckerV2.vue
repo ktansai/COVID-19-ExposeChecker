@@ -86,19 +86,33 @@
             </v-expansion-panel>
             </v-expansion-panels>
         </v-row>
-
       <v-row >
 
             <v-textarea 
-              v-model=exposeJsonText
+              v-model=sourceJsonText
               outlined
               label="ここにログファイルをペーストしてください">
             </v-textarea>
       </v-row>
-      <p class="text-caption">
-        <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
-        <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
-      </p>
+      <v-row>
+      <v-btn
+              class="mx-auto mb-6"
+              @click="handleFileInput"
+              style="text-transform: none"
+              small
+              >
+              <v-icon
+              dark
+            >
+              mdi-file
+            </v-icon>
+      ファイルを開く(Android用)
+      </v-btn>
+      <input ref="fileInput"
+          class="d-none"
+          @change="onFileChanged"
+          type="file" />
+      </v-row>
       <v-row class="mb-5 justify-center">
         <v-col cols="6"> 
           <v-btn
@@ -114,6 +128,11 @@
         </v-btn>
         </v-col>
       </v-row>
+
+      <p class="text-caption">
+        <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
+        <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
+      </p>
       <v-row class="mt-6 mb-6">
         <div v-if="resultText.length > 0">
             <p class="my-5 text-left"> 
@@ -244,7 +263,7 @@
           const explainTextZeroContact    = "<b>説明:</b><br>本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。無症状感染者やCOCOAの陽性登録をしていない感染者の方が近くにいた可能性はありますので、引き続き感染症対策に万全を期すことをおすすめします。"
           const explainTextNonZeroContact = "<b>説明:</b><br>接触通知アプリ(COCOA)を開いて陽性者との接触の検出がない場合は感染リスクは低いものと推測されます。過度に恐れず、引き続き感染症対策に万全を期すことをおすすめします。"
 
-          const exposeData = JSON.parse(this.exposeJsonText)
+          const exposeData = JSON.parse(this.sourceJsonText)
 
           const fromDate = new Date()
           fromDate.setDate(fromDate.getDate() - 14)
@@ -290,17 +309,30 @@
 
       },
       clearJson: function(){
-        this.exposeJsonText = ""
+        this.sourceJsonText = ""
       },
       showNotes: function(){
         this.panel = [0]
       },
+      handleFileInput: function(){
+        this.$refs.fileInput.click()
+      },
+      onFileChanged: function(event){
+        let reader = new FileReader()
+        reader.readAsText(event.target.files[0])
+        reader.onload = function() {
+          this.sourceJsonText = reader.result
+        }.bind(this);
+        reader.onerror = function() {
+          console.log(reader.error);
+        };
+      }
     },
     data: function(){
       return {
         resultJsonText: "",
         resultText: "",
-        exposeJsonText: "",
+        sourceJsonText: "",
         explainText: "",
         exposureDateList: {},
         exposureDict: {},

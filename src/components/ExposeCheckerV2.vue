@@ -215,7 +215,8 @@
   }
 
   function dateToString(dateTimeUtc){
-    return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日`
+    let day_jp = ['日', '月', '火', '水', '木', '金', '土']
+    return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日 (${day_jp[dateTimeUtc.getDay()]})`
   }
 
   export default {

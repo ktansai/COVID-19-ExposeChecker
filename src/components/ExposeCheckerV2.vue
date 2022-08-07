@@ -133,28 +133,38 @@
         <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
         <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
       </p>
-      <v-row class="mt-6 mb-6">
+      <v-row justify="center" class="mt-6 mb-6 ">
         <div v-if="resultText.length > 0">
             <p class="my-5 text-left"> 
-              <b>結果:</b> <br> {{resultText}}<br> (※結果は2週間前までのログデータを対象にしています)<br><br>
-              <ul>
-                <li v-for="date in exposureDateList" :key="date.id">
-                  {{ exposureDict[date]["local_date"] }} : {{ exposureDict[date]["daily_count"] +"件" }}
-                </li>
-              </ul>
-              <br>
-              <span v-html="explainText" ></span><br><br>
-              <span >
-                <b>本結果に関して:</b><br>
-                <ul>
-                    <li>本結果を理由に保健所や医療機関等へのご連絡はお控えください。</li>
-                    <li>ご不明点がある場合は、下記の「よくある質問」をご一読の上、解決しない場合は本サイトの製作者にご連絡ください。<span class="text-small">(<a href='mailto:cocoa.log.checker@gmail.com' target="_blank">cocoa.log.checker@gmail.com</a>)</span></li>
-                </ul>
-                </span>
+              <b>結果:</b> <br> {{resultText}}<br> (※結果は2週間以内を表示)<br><br>
+
+              <v-simple-table dense>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        日付(朝9:00~翌朝8:59)
+                      </th>
+                      <th class="text-left">
+                        件数
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="date in exposureDateList"
+                      :key="date.id"
+                    >
+                      <td>{{ exposureDict[date]["local_date"] }}(<span :style="{ color : exposureDict[date]['day_color']}">{{exposureDict[date]['local_day']}}</span>) </td>
+                      <td>{{ exposureDict[date]["daily_count"] }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </p>
         </div>
-        <FAQ id="FAQ"/>
       </v-row>
+      <FAQ id="FAQ"/>
 
       <v-row class="justify-center my-8" v-if="this.resultText.length > 0" > 
         <div>
@@ -218,6 +228,21 @@
     return `${dateTimeUtc.getFullYear()}年${dateTimeUtc.getMonth() + 1}月${dateTimeUtc.getDate()}日`
   }
 
+  function dayToString(dateTimeUtc){
+    const dayStringMap = [ "日", "月", "火", "水", "木", "金", "土" ]
+    return dayStringMap[dateTimeUtc.getDay()]
+  }
+
+  function getDayColor(day){
+    if(day == 0){
+      return "#F44336"
+    }
+    if(day == 6){
+      return "#3F51B5"
+    }
+    return "#000000"
+  }
+
   export default {
     name: 'ExposureCheckerV2',
     components: {
@@ -243,10 +268,13 @@
             let dateTimeUtc = new Date(0)
             dateTimeUtc.setUTCMilliseconds(dateMillsSinceEpoch)
             let localDate = dateToString(dateTimeUtc)
+            let localDay = dayToString(dateTimeUtc)
             let dailyCount = exposrueWindows.length
 
             detail[dateMillsSinceEpoch] = {
               "local_date": localDate,
+              "local_day" : localDay,
+              "day_color": getDayColor(dateTimeUtc.getDay()),
               "exposrue_windows": exposrueWindows,
               "daily_count": dailyCount
             }

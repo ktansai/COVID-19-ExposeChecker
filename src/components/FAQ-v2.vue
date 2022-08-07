@@ -131,7 +131,6 @@
             </v-icon>
             COCOAログチェッカー公式
           </v-btn>
-            <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
         </v-expansion-panel-content>
       </v-expansion-panel>
 

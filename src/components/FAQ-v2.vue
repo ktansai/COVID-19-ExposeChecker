@@ -26,21 +26,66 @@
 
       <v-expansion-panel>
         <v-expansion-panel-header class="accordion-header">
-          COCOAログチェッカー2.0は前と比べて何が違いますか？
+          <span>
+            <span >
+              <v-chip
+                x-small
+                color="blue lighten-2"
+                text-color="white"
+              >
+                更新
+              </v-chip>
+            </span>
+          COCOAログチェッカー2.0は前と何が違いますか？
+           </span>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           バージョン1.0は、Android/iOSの設定アプリからエクスポートできるログデータを解析していましたが、<br>
-          バージョン2.0では、COCOAアプリからエクスポートできるログデータを解析するものとなっています。
+          バージョン2.0では、COCOAアプリからエクスポートできるログデータを解析するものとなっています。<br>
+          <br>
+          (2022/08/08 更新)<br>
+          また、ログの形式が変わった影響により、1件のカウントの条件が異なっています。詳細は下のカウント条件をご覧ください。<br>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header class="accordion-header">
+          <span>
+            <span >
+              <v-chip
+                x-small
+                color="red lighten-2"
+                text-color="white"
+              >
+                New
+              </v-chip>
+            </span>
+            1件としてカウントされる条件は何ですか？</span>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          1名の陽性登録者と自分の端末が約1~30分間通信した際に、1件としてカウントされます。<br>
+          例えば、陽性登録者と3時間電波が届く距離に居た記録がある場合は、計6件として表示されます。
         </v-expansion-panel-content>
       </v-expansion-panel>
 
       <v-expansion-panel>
         <v-expansion-panel-header class="accordion-header">
-          数日間外出を自粛していて接触の心当たりがありませんが、結果の数字が増えています。どうしてですか？
+            <span>
+            <span >
+              <v-chip
+                x-small
+                color="red lighten-2"
+                text-color="white"
+              >
+                New
+              </v-chip>
+            </span>
+            外出していない日にも、記録が多いです。なぜですか？
+            </span>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          2週間の間に接触した方が、その後に発症し陽性登録された場合、遅れて結果の数字に反映されるようです。<br />
-          行動パターンを変えて、実際に数字に反映されるまで、1〜2週間のタイムラグが存在します。
+          Bluetoothの電波は、機種や環境的な条件によっては50m以上の距離でも届く場合があります。
+          COCOAでの通知がない場合は、問題
+          あくまで、身近にどれくらい感染者がいて、感染リスクの把握にお役立てください。
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -49,9 +94,8 @@
           昨日人混みを通りましたが、今日ログをチェックしてみたところ、結果は増えませんでした。これは安全だったということですか？
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          昨日すれ違った方が
-          COCOAでの陽性登録がまだだった場合、結果にはすぐに反映されません。<br />
-          1週間後になって結果が急激に増えることもあります。
+          昨日すれ違った方が未発症だった場合、又はCOCOAでの陽性登録がまだだった場合、結果にはすぐに反映されません。<br />
+          数日後になって結果が急激に増えることもあります。
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -63,10 +107,30 @@
           以下の機能の追加やリリースを考えています。
           <ul>
             <li>COCOAログチェッカー2.0の正式リリース</li>
-            <li>2週間より前に遡るデータの解析</li>
+            <li>低リスクな接触の距離・時間の表示</li>
+            <li>2週間より前に遡るデータの表示</li>
             <li>グラフ等での見やすい表示</li>
           </ul>
+          <br>
+          機能のアップデートの際は、下記Twitterアカウントからお知らせを行います。<br><br>
 
+          <v-btn
+            rounded
+            dark
+            color="#1DA1F2"
+            target="_blank"
+            href="https://twitter.com/CocoaLogChecker"
+          >
+            <v-icon
+              left
+              dark
+              small
+            >
+              mdi-twitter
+            </v-icon>
+            COCOAログチェッカー公式
+          </v-btn>
+            <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
         </v-expansion-panel-content>
       </v-expansion-panel>
 

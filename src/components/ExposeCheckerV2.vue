@@ -40,6 +40,9 @@
                     <v-img width="80%" max-width="400px" src="@/assets/images/cocoa-difference.png"/>
                     </v-layout>
                   <ul>
+                    <li>Bluetoothの電波は機種や環境の条件によって、到達距離が50m以上になる場合もあります。<br>
+                    逆に10m程度までしか届かない場合もあります。(個人的な実験ではCOCOAの電波を60~70m等の距離でも受信出来る場合があることを確認しています)</li><br>
+                    <li>ログ解析の結果はあくまで、意外と周囲に陽性者がいるという把握の参考までに留めてください。</li><br>
                     <li>本ツールの利用には、新型コロナウイルス接触確認アプリCOCOA(2.0.1以上)のインストールが必要です。COCOAに関しては、<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html" target="_blank">厚生労働省のHP</a>をご確認ください。</li><br>
                     <li>本ツールは接触確認アプリの活用事例として厚生労働省HPに掲載いただいております。(<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/cocoa_00138.html#:~:text=%E3%80%90COCOA%E3%83%AD%E3%82%B0%E3%83%81%E3%82%A7%E3%83%83%E3%82%AB%E3%83%BC%E3%80%91%E3%81%AE%E3%81%94%E5%88%A9%E7%94%A8%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89%E3%81%8B%E3%82%89" target="_blank">厚生労働省のHP</a>)</li><br>
                     <li>本ツールは無償で使用可能ですが、この解析ツールを用いて起きた問題などについて、製作者は一切の責任を負いかねます。自己責任でご使用ください。</li><br>

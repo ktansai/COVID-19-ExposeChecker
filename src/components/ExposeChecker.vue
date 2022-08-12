@@ -273,7 +273,7 @@
             '接触通知ログを解析した結果、%0a' +
             resultText +
             '%0a%0a' +
-            'https://cocoa-log-checker.com%0a' +
+            'https://cocoa-log-checker.com%2F%23%2Fv1' +
             '&hashtags=COCOAログチェッカー'
           "
         >

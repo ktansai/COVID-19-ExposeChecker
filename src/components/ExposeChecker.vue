@@ -380,7 +380,7 @@ export default {
             default:
               if (checkCOCOA2iOS(exposeData.ExposureChecks)) {
                 alert(
-                  "データフォーマットエラー\nCOCOA2.0 (iOS)は非対応になりました。"
+                  "データフォーマットエラー\n新バージョンをお試しください。"
                 );
                 this.$refs.dialog.show = true;
                 return;

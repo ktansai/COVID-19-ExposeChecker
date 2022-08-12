@@ -6,9 +6,9 @@
           <span class="d-inline-block">COCOAログ</span
           ><span class="d-inline-block">チェッカー</span>
         </h1>
-        <p>接触通知ログ解析ツール</p>
+        <p>このバージョンは古いものになります。</p>
 
-        <router-link to="/beta"
+        <router-link to="/"
           >COCOAログチェッカー2.0 (β版)に切り替える</router-link
         >
       </div>

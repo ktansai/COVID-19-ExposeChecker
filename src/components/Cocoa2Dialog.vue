@@ -23,7 +23,7 @@
 
           下記からベータ版が利用可能です。<br />
 
-          <router-link to="/beta"
+          <router-link to="/"
             >COCOAログチェッカー2.0 (β版)に切り替える</router-link
           >
           <br />

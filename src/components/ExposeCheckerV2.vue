@@ -8,7 +8,7 @@
         </h1>
         <p>接触通知ログ解析ツール</p>
 
-        <router-link to="/">旧バージョン(ver1.0)はこちら</router-link>
+        <router-link to="/v1">旧バージョン(ver1.0)はこちら</router-link>
       </div>
     </v-row>
     <v-row class="justify-center">
@@ -288,7 +288,7 @@
             'COCOAのログデータを解析した結果、%0a' +
             resultText +
             '%0a%0a' +
-            'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta' +
+            'https%3A%2F%2Fcocoa-log-checker.com' +
             '%0a%23COCOAログチェッカー'
           "
         >

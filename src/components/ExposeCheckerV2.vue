@@ -8,7 +8,7 @@
         </h1>
         <p>接触通知ログ解析ツール</p>
 
-        <router-link to="/">旧バージョン(ver1.0)はこちら</router-link>
+        <router-link to="/v1">旧バージョン(ver1.0)はこちら</router-link>
       </div>
     </v-row>
     <v-row class="justify-center">
@@ -69,7 +69,7 @@
               <v-img
                 width="80%"
                 max-width="400px"
-                src="@/assets/images/cocoa-difference.png"
+                src="@/assets/images/cocoa-difference2.png"
               />
             </v-layout>
             <ul>
@@ -151,23 +151,33 @@
               Step1.
               COCOAアプリを開き、ログデータをGoogleDriveまたはローカルに保存する<br />
             </p>
-
             <p class="text-left text-caption">
               接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。
             </p>
             <v-img src="@/assets/images/instruction-cocoa2-android-01.png" />
-            <br />
+            <v-divider class="mt-6 mb-6" />
             <p class="text-left">
               Step2.
               GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
               [すべて選択]を押し、[コピー]を押す。<br />
               <v-img src="@/assets/images/instruction-cocoa2-android-02.png" />
             </p>
+            <v-divider class="mt-6 mb-6" />
             <p class="text-left">
               Step3. 下記入力枠を選択し、[貼り付け]を押す。
               <br />
               <v-img src="@/assets/images/instruction-android-03.png" />
             </p>
+
+            <v-divider class="mt-6 mb-6" />
+
+            <p class="text-left text-caption">
+              ※コピーができない場合:<br />
+              [ファイルを開く]ボタンを押して、保存した[exposure-data.json]を開いてください。
+            </p>
+            <v-card class="rounded-lg">
+              <v-img src="@/assets/images/instruction-open-file.png" />
+            </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -216,32 +226,35 @@
     </p>
     <v-row justify="center" class="mt-6 mb-6">
       <div v-if="resultText.length > 0">
-        <p class="my-5 text-left">
-          <b>結果:</b> <br />
-          {{ resultText }}<br />
-          (※結果は2週間以内を表示)<br /><br />
+        <p class="mt-5 text-left">
+          <b>結果: </b> <br />
+          {{ resultText }}
+        </p>
 
-          <v-simple-table dense>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">日付(朝9:00~翌朝8:59)</th>
-                  <th class="text-left">件数</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="date in exposureDateList" :key="date.id">
-                  <td>
-                    {{ exposureDict[date]["local_date"] }}(<span
-                      :style="{ color: exposureDict[date]['day_color'] }"
-                      >{{ exposureDict[date]["local_day"] }}</span
-                    >)
-                  </td>
-                  <td>{{ exposureDict[date]["daily_count"] }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+        <v-simple-table class="my-4" dense v-if="exposureDateList.length > 0">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">日付(朝9:00~翌朝8:59)</th>
+                <th class="text-left">件数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="date in exposureDateList" :key="date.id">
+                <td>
+                  {{ exposureDict[date]["local_date"] }}(<span
+                    :style="{ color: exposureDict[date]['day_color'] }"
+                    >{{ exposureDict[date]["local_day"] }}</span
+                  >)
+                </td>
+                <td>{{ exposureDict[date]["daily_count"] }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+        <p class="text-left text-caption">
+          期間:{{ inspectionPeriod }}<br />
+          ※1件のカウント条件については<a href="#FAQ">FAQ</a>をご覧ください。
         </p>
         <br />
         <div align="left">
@@ -279,7 +292,7 @@
             'COCOAのログデータを解析した結果、%0a' +
             resultText +
             '%0a%0a' +
-            'https%3A%2F%2Fcocoa-log-checker.com%2F%23%2Fbeta' +
+            'https%3A%2F%2Fcocoa-log-checker.com' +
             '%0a%23COCOAログチェッカー'
           "
         >
@@ -417,7 +430,7 @@ export default {
           Array.isArray(exposeData)
         ) {
           alert(
-            "COCOAログチェッカー2.0では設定画面からエクスポートできるログデータの解析をサポートしていません。旧バージョンをご利用ください"
+            "データフォーマットエラー\nCOCOAログチェッカー2.0では旧バージョンから使い方が大きく変わっています。使い方をもう一度ご確認ください。"
           );
           return;
         } else {
@@ -440,7 +453,7 @@ export default {
 
         if (countSum > 0) {
           // 結果あり
-          this.resultText = `${countSum}件の新規陽性登録者が近くにいた記録が確認されました。`;
+          this.resultText = `新規陽性登録者が近くにいた記録が${countSum}件確認されました。`;
           this.explainText = explainTextNonZeroContact;
         } else {
           this.resultText =
@@ -495,6 +508,12 @@ export default {
           .replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, "") + "T190000";
       const result = `${nextStartDate}/${nextEndDate}`;
       return result;
+    },
+    inspectionPeriod: function () {
+      const today = new Date();
+      const fromDate = new Date();
+      fromDate.setDate(today.getDate() - 14);
+      return `${dateToString(today)} ~ ${dateToString(fromDate)}`;
     },
   },
 };

@@ -6,9 +6,9 @@
           <span class="d-inline-block">COCOAログ</span
           ><span class="d-inline-block">チェッカー</span>
         </h1>
-        <p>接触通知ログ解析ツール</p>
+        <p>このバージョンは古いものになります。</p>
 
-        <router-link to="/beta"
+        <router-link to="/"
           >COCOAログチェッカー2.0 (β版)に切り替える</router-link
         >
       </div>
@@ -273,7 +273,7 @@
             '接触通知ログを解析した結果、%0a' +
             resultText +
             '%0a%0a' +
-            'https://cocoa-log-checker.com%0a' +
+            'https://cocoa-log-checker.com%2F%23%2Fv1' +
             '&hashtags=COCOAログチェッカー'
           "
         >
@@ -380,7 +380,7 @@ export default {
             default:
               if (checkCOCOA2iOS(exposeData.ExposureChecks)) {
                 alert(
-                  "データフォーマットエラー\nCOCOA2.0 (iOS)は非対応になりました。"
+                  "データフォーマットエラー\n新バージョンをお試しください。"
                 );
                 this.$refs.dialog.show = true;
                 return;

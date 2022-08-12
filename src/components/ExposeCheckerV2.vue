@@ -69,7 +69,7 @@
               <v-img
                 width="80%"
                 max-width="400px"
-                src="@/assets/images/cocoa-difference.png"
+                src="@/assets/images/cocoa-difference2.png"
               />
             </v-layout>
             <ul>
@@ -151,23 +151,32 @@
               Step1.
               COCOAアプリを開き、ログデータをGoogleDriveまたはローカルに保存する<br />
             </p>
-
             <p class="text-left text-caption">
               接触通知ログは、個人を特定することが難しい秘匿性の高いデータですが、スマホ外部に保存することに抵抗がある方は、ローカルに保存することをおすすめします。
             </p>
             <v-img src="@/assets/images/instruction-cocoa2-android-01.png" />
-            <br />
+            <v-divider class="mt-6 mb-6"/>
             <p class="text-left">
               Step2.
               GoogleDriveアプリまたは、ローカルのファイルから保存したログデータを開き、
               [すべて選択]を押し、[コピー]を押す。<br />
               <v-img src="@/assets/images/instruction-cocoa2-android-02.png" />
             </p>
+            <v-divider class="mt-6 mb-6"/>
             <p class="text-left">
               Step3. 下記入力枠を選択し、[貼り付け]を押す。
               <br />
               <v-img src="@/assets/images/instruction-android-03.png" />
             </p>
+
+            <v-divider class="mt-6 mb-6"/>
+
+            <p class="text-left text-caption" >
+              ※コピーができない場合:<br> [ファイルを開く]ボタンを押して、保存した[exposure-data.json]を開いてください。
+            </p>
+            <v-card class="rounded-lg">
+              <v-img src="@/assets/images/instruction-open-file.png" />
+            </v-card>      
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>

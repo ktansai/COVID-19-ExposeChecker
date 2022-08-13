@@ -253,7 +253,7 @@
           </template>
         </v-simple-table>
         <p class="text-left text-caption">
-          期間:{{ inspectionPeriod }}<br />
+          期間:{{ inspectionPeriod }} (2週間)<br />
           ※1件のカウント条件については<a href="#FAQ">FAQ</a>をご覧ください。
         </p>
         <br />

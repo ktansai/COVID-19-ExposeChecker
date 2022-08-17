@@ -254,7 +254,8 @@
         </v-simple-table>
         <p class="text-left text-caption">
           期間:{{ inspectionPeriod }} (2週間)<br />
-          ※1件のカウント条件については<a href="#FAQ">FAQ</a>をご覧ください。
+          ※1件のカウント条件については<a href="#FAQ">よくある質問</a>をご覧ください。<br>
+          ※陽性登録者とのすれ違いの記録のなかった日は表示されません。
         </p>
         <br />
         <div align="left">

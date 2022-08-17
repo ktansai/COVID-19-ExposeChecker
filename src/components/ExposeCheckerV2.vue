@@ -418,7 +418,8 @@ export default {
         const exposeData = JSON.parse(this.sourceJsonText);
 
         const fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 14);
+        fromDate.setDate(fromDate.getDate() - 13);
+        fromDate.setHours(8);
         const fromEpochMillis = fromDate.getTime();
 
         let checkLogResult;
@@ -512,7 +513,7 @@ export default {
     inspectionPeriod: function () {
       const today = new Date();
       const fromDate = new Date();
-      fromDate.setDate(today.getDate() - 14);
+      fromDate.setDate(today.getDate() - 13);
       return `${dateToString(today)} ~ ${dateToString(fromDate)}`;
     },
   },

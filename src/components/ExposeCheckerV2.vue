@@ -254,7 +254,8 @@
         </v-simple-table>
         <p class="text-left text-caption">
           期間:{{ inspectionPeriod }} (2週間)<br />
-          ※1件のカウント条件については<a href="#FAQ">FAQ</a>をご覧ください。
+          ※1件のカウント条件については<a href="#FAQ">よくある質問</a>をご覧ください。<br>
+          ※陽性登録者とのすれ違いの記録のなかった日は表示されません。
         </p>
         <br />
         <div align="left">
@@ -418,7 +419,8 @@ export default {
         const exposeData = JSON.parse(this.sourceJsonText);
 
         const fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 14);
+        fromDate.setDate(fromDate.getDate() - 13);
+        fromDate.setHours(8);
         const fromEpochMillis = fromDate.getTime();
 
         let checkLogResult;
@@ -512,7 +514,7 @@ export default {
     inspectionPeriod: function () {
       const today = new Date();
       const fromDate = new Date();
-      fromDate.setDate(today.getDate() - 14);
+      fromDate.setDate(today.getDate() - 13);
       return `${dateToString(today)} ~ ${dateToString(fromDate)}`;
     },
   },

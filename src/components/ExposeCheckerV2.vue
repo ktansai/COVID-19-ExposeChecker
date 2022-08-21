@@ -515,7 +515,7 @@ export default {
       const today = new Date();
       const fromDate = new Date();
       fromDate.setDate(today.getDate() - 13);
-      return `${dateToString(today)} ~ ${dateToString(fromDate)}`;
+      return `${dateToString(fromDate)} ~ ${dateToString(today)}`;
     },
   },
 };
